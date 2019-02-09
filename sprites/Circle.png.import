@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background-References.png-1abf7d858fcd8c7e458dc52221976e1d.stex"
+path="res://.import/Circle.png-faa754259070cef58ca2187e32b336ce.stex"
 
 [deps]
 
-source_file="res://sprites/Background-References.png"
-dest_files=[ "res://.import/Background-References.png-1abf7d858fcd8c7e458dc52221976e1d.stex" ]
+source_file="res://sprites/Circle.png"
+dest_files=[ "res://.import/Circle.png-faa754259070cef58ca2187e32b336ce.stex" ]
 
 [params]
 
