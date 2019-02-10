@@ -18,16 +18,41 @@ onready var cacti : Dictionary = {
 	STATUS.CACTUS_5 : $Sprites/CactusPhase05,
 }
 
-func _on_Slot_mouse_entered():
+onready var game = get_node("/root/game")
+onready var mouse_on_slot : bool = false
+
+func _ready() -> void:
+	game.add_slot(self)
+
+func show_transparent_cactus():
+	var cactus1 = cacti[STATUS.CACTUS_1]
+	cactus1.modulate = Color(1, 1, 1, 0.5)
+	cactus1.show()
+
+func hide_transparent_cactus():
+	var cactus1 = cacti[STATUS.CACTUS_1]
+	cactus1.hide()
+	cactus1.modulate = Color(1, 1, 1, 1)
+
+func mouse_entered() -> void:
 	if status == STATUS.EMPTY:
-		var cactus1 = cacti[STATUS.CACTUS_1]
-		
-		cactus1.modulate = Color(1, 1, 1, 0.5)
-		cactus1.show()
+		if game.get_item_selected() == game.ITEM_SELECTED.CACTUS:
+			show_transparent_cactus()
+		else:
+			hide_transparent_cactus()
+
+func mouse_exited() -> void:
+	if status == STATUS.EMPTY:
+		hide_transparent_cactus()
+
+func _on_Slot_mouse_entered():
+	mouse_on_slot = true
+	mouse_entered()
 
 func _on_Slot_mouse_exited():
+	mouse_on_slot = false
+	mouse_exited()
+
+func on_item_selected_changed(item_selected : int):
 	if status == STATUS.EMPTY:
-		var cactus1 = cacti[STATUS.CACTUS_1]
-		
-		cactus1.hide()
-		cactus1.modulate = Color(1, 1, 1, 1)
+		hide_transparent_cactus()
