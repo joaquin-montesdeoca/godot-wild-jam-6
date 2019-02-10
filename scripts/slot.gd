@@ -9,7 +9,7 @@ enum STATUS {
 	CACTUS_5 = 5,
 }
 
-onready var status : int = STATUS.EMPTY
+onready var status : int = STATUS.EMPTY setget set_status
 onready var cacti : Dictionary = {
 	STATUS.CACTUS_1 : $Sprites/CactusPhase01,
 	STATUS.CACTUS_2 : $Sprites/CactusPhase02,
@@ -19,10 +19,24 @@ onready var cacti : Dictionary = {
 }
 
 onready var game = get_node("/root/game")
-onready var mouse_on_slot : bool = false
+onready var hovering : bool = false
 
 func _ready() -> void:
 	game.add_slot(self)
+
+func _input(event : InputEvent) -> void:
+	if event is InputEventMouseButton and hovering:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			mouse_clicked()
+
+func set_status(value : int) -> void:
+	status = value
+	
+	for i in cacti:
+		cacti[i].visible = false
+	
+	if status != STATUS.EMPTY:
+		cacti[status].visible = true
 
 func show_transparent_cactus():
 	var cactus1 = cacti[STATUS.CACTUS_1]
@@ -34,24 +48,50 @@ func hide_transparent_cactus():
 	cactus1.hide()
 	cactus1.modulate = Color(1, 1, 1, 1)
 
-func mouse_entered() -> void:
+func mouse_clicked() -> void:
+	if status == STATUS.EMPTY:
+		var item_selected : int = game.get_item_selected()
+		
+		if item_selected == game.ITEM_SELECTED.CACTUS:
+			plant()
+	else:
+		var item_selected : int = game.get_item_selected()
+		
+		if item_selected == game.ITEM_SELECTED.SCISSORS:
+			cut()
+
+func plant() -> void:
+	if status == STATUS.EMPTY:
+		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
+		game.add_cacti(-1)
+		set_status(STATUS.CACTUS_1)
+
+func cut() -> void:
+	if status != STATUS.EMPTY:
+		var new_status : int
+		match status:
+			STATUS.CACTUS_1: new_status = STATUS.EMPTY
+			STATUS.CACTUS_2: new_status = STATUS.CACTUS_1
+			STATUS.CACTUS_3: new_status = STATUS.CACTUS_2
+			STATUS.CACTUS_4: new_status = STATUS.CACTUS_3
+			STATUS.CACTUS_5: new_status = STATUS.CACTUS_4
+		
+		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
+		game.add_cacti(1)
+		set_status(new_status)
+
+func _on_Slot_mouse_entered():
+	hovering = true
 	if status == STATUS.EMPTY:
 		if game.get_item_selected() == game.ITEM_SELECTED.CACTUS:
 			show_transparent_cactus()
 		else:
 			hide_transparent_cactus()
 
-func mouse_exited() -> void:
+func _on_Slot_mouse_exited():
+	hovering = false
 	if status == STATUS.EMPTY:
 		hide_transparent_cactus()
-
-func _on_Slot_mouse_entered():
-	mouse_on_slot = true
-	mouse_entered()
-
-func _on_Slot_mouse_exited():
-	mouse_on_slot = false
-	mouse_exited()
 
 func on_item_selected_changed(item_selected : int):
 	if status == STATUS.EMPTY:
