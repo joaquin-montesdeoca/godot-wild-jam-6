@@ -20,6 +20,7 @@ onready var cacti : Dictionary = {
 
 onready var game = get_node("/root/game")
 onready var hovering : bool = false
+onready var pop_up_item = preload("res://scenes/pop_up_item.tscn")
 
 func _ready() -> void:
 	game.add_slot(self)
@@ -79,6 +80,17 @@ func cut() -> void:
 		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
 		game.add_cacti(1)
 		set_status(new_status)
+		pop_up_cactus()
+
+func pop_up_cactus() -> void:
+	var pop_up = pop_up_item.instance()
+	pop_up.set_position(Vector2(40, 40))
+	pop_up.set_scale(Vector2(0.27, 0.27))
+	pop_up.set_light_color(Color("#ffff00"))
+	pop_up.set_rect_extends(Vector2(80, 100))
+	add_child(pop_up)
+	
+	pop_up.jump()
 
 func _on_Slot_mouse_entered():
 	hovering = true

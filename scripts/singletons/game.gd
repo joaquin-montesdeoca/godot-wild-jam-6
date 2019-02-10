@@ -9,12 +9,19 @@ enum ITEM_SELECTED {
 }
 
 var gui : GUI setget set_gui
+var battleground : Node2D setget set_battleground, get_battleground
 var slots : Array
 var item_selected : int = ITEM_SELECTED.NOTHING setget set_item_selected, get_item_selected
 var num_cacti : int = 0 setget set_num_cacti, get_num_cacti
 
 func set_gui(value : GUI) -> void:
 	gui = value
+
+func set_battleground(value : Node2D) -> void:
+	battleground = value
+
+func get_battleground() -> Node2D:
+	return battleground
 
 func add_slot(slot : Node2D):
 	self.connect("item_selected_changed", slot, "on_item_selected_changed")
