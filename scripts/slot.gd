@@ -38,7 +38,10 @@ func set_status(value : int) -> void:
 		cacti[i].visible = false
 	
 	if status != STATUS.EMPTY:
+		cacti[status].modulate = Color(1, 1, 1, 1)
 		cacti[status].visible = true
+		if status != STATUS.CACTUS_5:
+			$Timers/GrowUp.start()
 
 func show_transparent_cactus():
 	var cactus1 = cacti[STATUS.CACTUS_1]
@@ -64,23 +67,23 @@ func mouse_clicked() -> void:
 
 func plant() -> void:
 	if status == STATUS.EMPTY:
-		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
 		game.add_cacti(-1)
 		set_status(STATUS.CACTUS_1)
 
 func cut() -> void:
 	if status != STATUS.EMPTY:
 		var new_status : int
-		match status:
-			STATUS.CACTUS_1: new_status = STATUS.EMPTY
-			STATUS.CACTUS_2: new_status = STATUS.CACTUS_1
-			STATUS.CACTUS_3: new_status = STATUS.CACTUS_2
-			STATUS.CACTUS_4: new_status = STATUS.CACTUS_3
-			STATUS.CACTUS_5: new_status = STATUS.CACTUS_4
+		new_status = status - 1
 		
-		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
 		set_status(new_status)
 		pop_up_cactus()
+
+func grow_up() -> void:
+	if status != STATUS.EMPTY and status != STATUS.CACTUS_5:
+		var new_status : int
+		new_status = status + 1
+		
+		set_status(new_status)
 
 func pop_up_cactus() -> void:
 	var pop_up = pop_up_item.instance()
@@ -118,3 +121,6 @@ func on_item_selected_changed(item_selected : int):
 
 func on_collected_cactus():
 	game.add_cacti(1)
+
+func _on_GrowUp_timeout():
+	grow_up()

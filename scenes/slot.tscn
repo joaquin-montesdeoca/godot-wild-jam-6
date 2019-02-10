@@ -20,6 +20,7 @@ shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
 [node name="Sprites" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="CactusPhase01" type="Sprite" parent="Sprites"]
 visible = false
@@ -51,7 +52,12 @@ position = Vector2( 39.6478, 52.5161 )
 scale = Vector2( 0.27, 0.27 )
 texture = ExtResource( 6 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+[node name="Timers" type="Node" parent="."]
+
+[node name="GrowUp" type="Timer" parent="Timers"]
+wait_time = 10.0
+one_shot = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_Slot_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Slot_mouse_exited"]
+[connection signal="timeout" from="Timers/GrowUp" to="." method="_on_GrowUp_timeout"]
