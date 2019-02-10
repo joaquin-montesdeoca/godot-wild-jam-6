@@ -16,6 +16,9 @@ func _input(event : InputEvent) -> void:
 func set_cacti_number(value : int):
 	$Buttons/Cactus.set_label_text(str(value))
 
+func get_cactus_button_position() -> Vector2:
+	return $Buttons/Cactus.global_position
+
 func set_item_selected(item_selected : int) -> void:
 	if item_selected == game.ITEM_SELECTED.NOTHING:
 		$Cursor.texture = null

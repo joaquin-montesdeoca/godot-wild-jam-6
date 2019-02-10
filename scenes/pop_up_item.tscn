@@ -2,7 +2,10 @@
 
 [ext_resource path="res://scripts/pop_up_item.gd" type="Script" id=1]
 [ext_resource path="res://sprites/LightCircle.png" type="Texture" id=2]
-[ext_resource path="res://sprites/CactusPhase01.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+radius = 69.3305
 
 [node name="PopUpItem" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,8 +14,14 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Item" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+
+[node name="ClickableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
+shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_ClickableArea_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_ClickableArea_mouse_exited"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

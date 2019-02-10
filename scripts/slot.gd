@@ -21,6 +21,7 @@ onready var cacti : Dictionary = {
 onready var game = get_node("/root/game")
 onready var hovering : bool = false
 onready var pop_up_item = preload("res://scenes/pop_up_item.tscn")
+onready var pop_up_texture = preload("res://sprites/CactusPhase01.png")
 
 func _ready() -> void:
 	game.add_slot(self)
@@ -78,17 +79,23 @@ func cut() -> void:
 			STATUS.CACTUS_5: new_status = STATUS.CACTUS_4
 		
 		game.set_item_selected(game.ITEM_SELECTED.NOTHING)
-		game.add_cacti(1)
 		set_status(new_status)
 		pop_up_cactus()
 
 func pop_up_cactus() -> void:
 	var pop_up = pop_up_item.instance()
-	pop_up.set_position(Vector2(40, 40))
+	pop_up.set_position(global_position + Vector2(40, 40))
 	pop_up.set_scale(Vector2(0.27, 0.27))
 	pop_up.set_light_color(Color("#ffff00"))
 	pop_up.set_rect_extends(Vector2(80, 100))
-	add_child(pop_up)
+	pop_up.set_item_texture(pop_up_texture)
+	
+	var go_to_point : Vector2 = game.get_gui().get_cactus_button_position()
+	pop_up.on_click_go_to(go_to_point)
+	
+	game.get_gui().add_child(pop_up)
+	
+	pop_up.connect("collected", self, "on_collected_cactus")
 	
 	pop_up.jump()
 
@@ -108,3 +115,6 @@ func _on_Slot_mouse_exited():
 func on_item_selected_changed(item_selected : int):
 	if status == STATUS.EMPTY:
 		hide_transparent_cactus()
+
+func on_collected_cactus():
+	game.add_cacti(1)

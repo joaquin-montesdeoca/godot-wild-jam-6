@@ -1,14 +1,23 @@
 extends Node2D
 
+signal collected
+
 var rect_extends : = Vector2()
 var motion : = Vector2()
 
 enum STATUS {
 	NOTHING,
 	JUMPING,
-	FLOATING
+	FLOATING,
+	DISSAPEAR,
+	GO_TO_POINT
 }
 var status : int = STATUS.JUMPING setget set_status
+
+var hovering : bool = false
+
+onready var on_click_action : Dictionary
+onready var game = get_node("/root/game")
 
 onready var animation_steps : Dictionary = {}
 onready var animation_current_steps : Dictionary = {}
@@ -22,6 +31,31 @@ func set_rect_extends(value : Vector2):
 
 func set_status(value : int):
 	status = value
+
+func set_item_texture(texture : Texture) -> void:
+	$Item.set_texture(texture)
+
+func _input(event : InputEvent) -> void:
+	if event is InputEventMouseButton and hovering:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			click()
+
+func click() -> void:
+	if status == STATUS.FLOATING:
+		if game.get_item_selected() == game.ITEM_SELECTED.NOTHING:
+			if not on_click_action.has("action"):
+				emit_signal("collected")
+				queue_free()
+			elif on_click_action["action"] == "dissapear":
+				dissapear()
+			elif on_click_action["action"] == "go_to":
+				go_to_point(on_click_action["point"])
+
+func on_click_dissapear() -> void:
+	on_click_action = {"action" : "dissapear"}
+
+func on_click_go_to(point : Vector2) -> void:
+	on_click_action = {"action" : "go_to", "point" : point}
 
 func jump() -> void:
 	var start : = Vector2()
@@ -64,6 +98,50 @@ func start_floating() -> void:
 	add_animation_step(":scale", {
 		"object" : $Light, "start" : end, "end" : start,
 		"time" : 1, "trans" : Tween.TRANS_QUAD, "ease" : Tween.EASE_IN_OUT
+	})
+	start_animation()
+
+func dissapear() -> void:
+	var start : = Color("#ffffffff")
+	var end : = Color("#00ffffff")
+	
+	set_status(STATUS.DISSAPEAR)
+	
+	reset_animation()
+	add_animation_step(":modulate", {
+		"object" : self, "start" : start, "end" : end,
+		"time" : 0.25, "trans" : Tween.TRANS_LINEAR, "ease" : Tween.EASE_IN
+	})
+	start_animation()
+
+func go_to_point(point : Vector2) -> void:
+	var start_pos : = global_position
+	var end_pos : = point
+	
+	var start_scale : = scale
+	var end_scale : = Vector2(0.4, 0.4)
+	
+	var start_color : = Color("#ffffffff")
+	var end_color : = Color("#00ffffff")
+	
+	set_status(STATUS.GO_TO_POINT)
+	
+	reset_animation()
+	add_animation_step(":global_position", {
+		"object" : self, "start" : start_pos, "end" : end_pos,
+		"time" : 0.5, "trans" : Tween.TRANS_CUBIC, "ease" : Tween.EASE_OUT
+	})
+	add_animation_step(":scale", {
+		"object" : self, "start" : start_scale, "end" : end_scale,
+		"time" : 0.5, "trans" : Tween.TRANS_CUBIC, "ease" : Tween.EASE_OUT
+	})
+	add_animation_step(":modulate", {
+		"object" : self, "start" : start_color, "end" : start_color,
+		"time" : 0.3, "trans" : Tween.TRANS_LINEAR, "ease" : Tween.EASE_IN
+	})
+	add_animation_step(":modulate", {
+		"object" : self, "start" : start_color, "end" : end_color,
+		"time" : 0.2, "trans" : Tween.TRANS_LINEAR, "ease" : Tween.EASE_IN
 	})
 	start_animation()
 
@@ -118,3 +196,12 @@ func _on_Tween_tween_completed(object : Object, key : NodePath):
 			start_floating()
 		elif status == STATUS.FLOATING:
 			start_animation()
+		elif status == STATUS.DISSAPEAR or status == STATUS.GO_TO_POINT:
+			emit_signal("collected")
+			queue_free()
+
+func _on_ClickableArea_mouse_entered():
+	hovering = true
+
+func _on_ClickableArea_mouse_exited():
+	hovering = false
