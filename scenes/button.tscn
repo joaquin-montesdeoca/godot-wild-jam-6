@@ -15,31 +15,35 @@ font_data = ExtResource( 4 )
 radius = 89.5858
 
 [node name="Button" type="Area2D"]
-position = Vector2( 0.663429, 1.32684 )
 script = ExtResource( 1 )
 
-[node name="CircleSprite" type="Sprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="CircleSprite" type="Sprite" parent="Sprites"]
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="IconSprite" type="Sprite" parent="."]
+[node name="IconSprite" type="Sprite" parent="Sprites"]
 
-[node name="LabelSprite" type="Sprite" parent="."]
+[node name="LabelSprite" type="Sprite" parent="Sprites"]
+editor/display_folded = true
+visible = false
 position = Vector2( 0, 75 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="LabelSprite"]
+[node name="CenterContainer" type="CenterContainer" parent="Sprites/LabelSprite"]
 margin_left = -80.0
 margin_top = -23.0
 margin_right = 76.0
 margin_bottom = 34.0
 
-[node name="Label" type="Label" parent="LabelSprite/CenterContainer"]
+[node name="Label" type="Label" parent="Sprites/LabelSprite/CenterContainer"]
 margin_left = 78.0
 margin_right = 78.0
 margin_bottom = 57.0
@@ -50,3 +54,7 @@ custom_colors/font_color = Color( 0.300781, 0.294077, 0.186813, 1 )
 visible = false
 shape = SubResource( 1 )
 
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Button_mouse_exited"]

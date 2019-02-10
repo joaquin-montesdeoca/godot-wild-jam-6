@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "GUI",
+"language": "GDScript",
+"path": "res://scripts/gui.gd"
+} ]
 _global_script_class_icons={
-
+"GUI": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="Cacti vs Dinosaurs"
 run/main_scene="res://scenes/battleground.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+game="*res://scripts/singletons/game.gd"
 
 [rendering]
 
