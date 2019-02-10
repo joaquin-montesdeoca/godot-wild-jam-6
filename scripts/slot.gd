@@ -10,12 +10,13 @@ enum STATUS {
 }
 
 onready var status : int = STATUS.EMPTY setget set_status
-onready var cacti : Dictionary = {
-	STATUS.CACTUS_1 : $Sprites/CactusPhase01,
-	STATUS.CACTUS_2 : $Sprites/CactusPhase02,
-	STATUS.CACTUS_3 : $Sprites/CactusPhase03,
-	STATUS.CACTUS_4 : $Sprites/CactusPhase04,
-	STATUS.CACTUS_5 : $Sprites/CactusPhase05,
+onready var states : Dictionary = {
+	STATUS.EMPTY : $States/Empty,
+	STATUS.CACTUS_1 : $States/Cactus1,
+	STATUS.CACTUS_2 : $States/Cactus1,
+	STATUS.CACTUS_3 : $States/Cactus3,
+	STATUS.CACTUS_4 : $States/Cactus4,
+	STATUS.CACTUS_5 : $States/Cactus5,
 }
 
 onready var game = get_node("/root/game")
@@ -25,65 +26,37 @@ onready var pop_up_texture = preload("res://sprites/CactusPhase01.png")
 
 func _ready() -> void:
 	game.add_slot(self)
+	setup_state_machine()
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and hovering:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			mouse_clicked()
 
+func setup_state_machine() -> void:
+	setup_state($States)
+	for key in states:
+		setup_state(states[key])
+
+func setup_state(state : Node) -> void:
+	state.set_sprites({
+		STATUS.CACTUS_1 : $Sprites/CactusPhase01,
+		STATUS.CACTUS_2 : $Sprites/CactusPhase02,
+		STATUS.CACTUS_3 : $Sprites/CactusPhase03,
+		STATUS.CACTUS_4 : $Sprites/CactusPhase04,
+		STATUS.CACTUS_5 : $Sprites/CactusPhase05,
+	})
+	state.set_timer({
+		"GrowUp" : $Timers/GrowUp,
+	})
+
 func set_status(value : int) -> void:
 	status = value
 	
-	for i in cacti:
-		cacti[i].visible = false
-	
-	if status != STATUS.EMPTY:
-		cacti[status].modulate = Color(1, 1, 1, 1)
-		cacti[status].visible = true
-		if status != STATUS.CACTUS_5:
-			$Timers/GrowUp.start()
-
-func show_transparent_cactus():
-	var cactus1 = cacti[STATUS.CACTUS_1]
-	cactus1.modulate = Color(1, 1, 1, 0.5)
-	cactus1.show()
-
-func hide_transparent_cactus():
-	var cactus1 = cacti[STATUS.CACTUS_1]
-	cactus1.hide()
-	cactus1.modulate = Color(1, 1, 1, 1)
+	states[status].start()
 
 func mouse_clicked() -> void:
-	if status == STATUS.EMPTY:
-		var item_selected : int = game.get_item_selected()
-		
-		if item_selected == game.ITEM_SELECTED.CACTUS:
-			plant()
-	else:
-		var item_selected : int = game.get_item_selected()
-		
-		if item_selected == game.ITEM_SELECTED.SCISSORS:
-			cut()
-
-func plant() -> void:
-	if status == STATUS.EMPTY:
-		game.add_cacti(-1)
-		set_status(STATUS.CACTUS_1)
-
-func cut() -> void:
-	if status != STATUS.EMPTY:
-		var new_status : int
-		new_status = status - 1
-		
-		set_status(new_status)
-		pop_up_cactus()
-
-func grow_up() -> void:
-	if status != STATUS.EMPTY and status != STATUS.CACTUS_5:
-		var new_status : int
-		new_status = status + 1
-		
-		set_status(new_status)
+	states[status].mouse_clicked()
 
 func pop_up_cactus() -> void:
 	var pop_up = pop_up_item.instance()
@@ -104,23 +77,17 @@ func pop_up_cactus() -> void:
 
 func _on_Slot_mouse_entered():
 	hovering = true
-	if status == STATUS.EMPTY:
-		if game.get_item_selected() == game.ITEM_SELECTED.CACTUS:
-			show_transparent_cactus()
-		else:
-			hide_transparent_cactus()
+	states[status].mouse_entered()
 
 func _on_Slot_mouse_exited():
 	hovering = false
-	if status == STATUS.EMPTY:
-		hide_transparent_cactus()
+	states[status].mouse_exited()
 
 func on_item_selected_changed(item_selected : int):
-	if status == STATUS.EMPTY:
-		hide_transparent_cactus()
+	states[status].item_selected_changed()
 
 func on_collected_cactus():
 	game.add_cacti(1)
 
 func _on_GrowUp_timeout():
-	grow_up()
+	states[status].grow_up()
