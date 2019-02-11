@@ -18,5 +18,8 @@ func damage(value : int) -> void:
 func process(delta : float) -> void:
 	return
 
+func cactus_collision(slot : Object) -> void:
+	return
+
 func animation_finished() -> void:
 	return

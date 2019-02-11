@@ -14,7 +14,7 @@ onready var status : int = STATUS.EMPTY setget set_status
 onready var states : Dictionary = {
 	STATUS.EMPTY : $States/Empty,
 	STATUS.CACTUS_1 : $States/Cactus1,
-	STATUS.CACTUS_2 : $States/Cactus1,
+	STATUS.CACTUS_2 : $States/Cactus2,
 	STATUS.CACTUS_3 : $States/Cactus3,
 	STATUS.CACTUS_4 : $States/Cactus4,
 	STATUS.CACTUS_5 : $States/Cactus5,
@@ -87,6 +87,9 @@ func pop_up_cactus() -> void:
 
 func damage() -> void:
 	states[status].damage()
+
+func get_damage() -> int:
+	return states[status].get_damage()
 
 func set_collision_disabled(value : bool) -> void:
 	$AreaCactus/Collision.disabled = value

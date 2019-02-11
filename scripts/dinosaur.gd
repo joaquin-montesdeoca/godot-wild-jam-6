@@ -7,7 +7,9 @@ enum STATUS {
 	ON_GROUND,
 	GETTING_UP,
 	TAKING_A_BREATH,
-	DYING
+	DYING,
+	DEAD,
+	VANISHING,
 }
 
 onready var states : Dictionary = {
@@ -17,6 +19,8 @@ onready var states : Dictionary = {
 	STATUS.GETTING_UP : $States/GettingUp,
 	STATUS.TAKING_A_BREATH : $States/TakingABreath,
 	STATUS.DYING : $States/Dying,
+	STATUS.DEAD : $States/Dead,
+	STATUS.VANISHING : $States/Vanishing,
 }
 
 const EYE_PUPIL = preload("res://sprites/Dinosaur/EyePupil.png")
@@ -38,12 +42,19 @@ func setup_state_machine() -> void:
 
 func setup_state(state : Node) -> void:
 	state.set_sprites({
-		"animation" : $Sprites/AnimationPlayer,
-		"eye" : $Sprites/Body/Eye,
+		"Sprites" : $Sprites,
+		"Animation" : $Sprites/AnimationPlayer,
+		"Eye" : $Sprites/Body/Eye,
+		"MiniCactus01" : $Sprites/Body/MiniCactus01,
+		"MiniCactus02" : $Sprites/Body/MiniCactus02,
+		"MiniCactus03" : $Sprites/Body/MiniCactus03,
+		"MiniCactus04" : $Sprites/Body/MiniCactus04,
+		"MiniCactus05" : $Sprites/Body/MiniCactus05,
 	})
 	state.set_timers({
 		"Idle" : $Timers/Idle,
 		"OnGround" : $Timers/OnGround,
+		"Dead" : $Timers/Dead,
 	})
 
 func set_status(value : int) -> void:
@@ -57,8 +68,7 @@ func _physics_process(delta : float) -> void:
 	states[status].process(delta)
 
 func _on_cactus_collision(area_id, area, area_shape, self_shape):
-	area.owner.damage()
-	set_status(STATUS.FALLING)
+	states[status].cactus_collision(area.owner)
 
 func _on_animation_finished(anim_name):
 	states[status].animation_finished()
@@ -68,3 +78,6 @@ func _on_OnGround_timeout():
 
 func _on_Idle_timeout():
 	set_status(STATUS.RUNNING)
+
+func _on_Dead_timeout():
+	set_status(STATUS.VANISHING)

@@ -3,7 +3,7 @@ extends "../states.gd"
 func start() -> void:
 	.start()
 	
-	sprites["animation"].play("Falling")
+	sprites["Animation"].play("Falling")
 
 func process(delta : float) -> void:
 	owner.position.x -= owner.SPEED * delta

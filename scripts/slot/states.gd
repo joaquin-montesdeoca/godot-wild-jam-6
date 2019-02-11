@@ -36,6 +36,9 @@ func grow_up() -> void:
 func damage() -> void:
 	return
 
+func get_damage() -> int:
+	return 0
+
 func mouse_entered() -> void:
 	return
 

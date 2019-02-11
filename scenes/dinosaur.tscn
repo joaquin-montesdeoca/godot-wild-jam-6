@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/dinosaur.gd" type="Script" id=1]
 [ext_resource path="res://scripts/dinosaur/states.gd" type="Script" id=2]
@@ -8,13 +8,153 @@
 [ext_resource path="res://scripts/dinosaur/states/getting_up.gd" type="Script" id=6]
 [ext_resource path="res://scripts/dinosaur/states/taking_a_breath.gd" type="Script" id=7]
 [ext_resource path="res://scripts/dinosaur/states/dying.gd" type="Script" id=8]
-[ext_resource path="res://sprites/Dinosaur/Body.png" type="Texture" id=9]
-[ext_resource path="res://sprites/Dinosaur/EyeClosed.png" type="Texture" id=10]
-[ext_resource path="res://sprites/Dinosaur/Arm.png" type="Texture" id=11]
-[ext_resource path="res://sprites/Dinosaur/Foot.png" type="Texture" id=12]
-[ext_resource path="res://sprites/Dinosaur/MiniCactus.png" type="Texture" id=13]
-[ext_resource path="res://sprites/Dinosaur/EyePupil.png" type="Texture" id=14]
-[ext_resource path="res://sprites/Dinosaur/EyeOpen.png" type="Texture" id=15]
+[ext_resource path="res://scripts/dinosaur/states/dead.gd" type="Script" id=9]
+[ext_resource path="res://scripts/dinosaur/states/vanishing.gd" type="Script" id=10]
+[ext_resource path="res://sprites/Dinosaur/Body.png" type="Texture" id=11]
+[ext_resource path="res://sprites/Dinosaur/EyeDead.png" type="Texture" id=12]
+[ext_resource path="res://sprites/Dinosaur/Arm.png" type="Texture" id=13]
+[ext_resource path="res://sprites/Dinosaur/Foot.png" type="Texture" id=14]
+[ext_resource path="res://sprites/Dinosaur/MiniCactus.png" type="Texture" id=15]
+[ext_resource path="res://sprites/Dinosaur/EyePupil.png" type="Texture" id=16]
+[ext_resource path="res://sprites/Dinosaur/EyeOpen.png" type="Texture" id=17]
+[ext_resource path="res://sprites/Dinosaur/EyeClosed.png" type="Texture" id=18]
+
+[sub_resource type="Animation" id=6]
+
+resource_name = "Dying"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 25.3965, 40.0624 ), Vector2( 25.3965, 51.0624 ), Vector2( 25.3965, 91.0624 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -45.0, -45.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ArmFront:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -41.0674, 3.08005 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ArmFront:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 60.0, 30.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ArmBehind:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -54.9276, -12.8335 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ArmBehind:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 60.0, 30.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LegFront:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 18.1445, 32.4246 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("LegFront:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -60.0, -30.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("LegBehind:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9.41391, 27.5614 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("LegBehind:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -60.0, -30.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Eye:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 
@@ -150,7 +290,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0, 0.1, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 10 ) ]
+"values": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -287,7 +427,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0, 0.1, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 14 ) ]
+"values": [ ExtResource( 18 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 16 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -305,7 +445,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ) ]
+"values": [ ExtResource( 18 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rotation_degrees")
@@ -494,9 +634,158 @@ tracks/9/keys = {
 "values": [ 0.0, 30.0, 0.0, -30.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=7]
+
+resource_name = "Vanishing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 25.3965, 91.0624 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -45.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ArmFront:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ArmFront:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 30.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ArmBehind:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ArmBehind:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 30.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LegFront:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("LegFront:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("LegBehind:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("LegBehind:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Eye:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("..:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=5]
 
-extents = Vector2( 80.896, 119.053 )
+extents = Vector2( 51.4223, 119.053 )
 
 [node name="Dinosaur" type="Node2D"]
 script = ExtResource( 1 )
@@ -525,24 +814,30 @@ script = ExtResource( 7 )
 [node name="Dying" type="Node" parent="States"]
 script = ExtResource( 8 )
 
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Vanishing" type="Node" parent="States"]
+script = ExtResource( 10 )
+
 [node name="Sprites" type="Node2D" parent="."]
 editor/display_folded = true
+modulate = Color( 1, 1, 1, 0 )
 
 [node name="Body" type="Sprite" parent="Sprites"]
-editor/display_folded = true
 position = Vector2( 25.3965, 91.0624 )
 rotation = -0.785398
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 offset = Vector2( -34.1233, -46.2225 )
 
 [node name="Eye" type="Sprite" parent="Sprites/Body"]
 position = Vector2( -64.5403, -111.502 )
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 
 [node name="ArmFront" type="Sprite" parent="Sprites/Body"]
 position = Vector2( -41.0674, 3.08005 )
 rotation = 0.523599
-texture = ExtResource( 11 )
+texture = ExtResource( 13 )
 offset = Vector2( -30.2872, -1.0267 )
 
 [node name="ArmBehind" type="Sprite" parent="Sprites/Body"]
@@ -550,13 +845,13 @@ self_modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
 position = Vector2( -54.9276, -12.8335 )
 rotation = 0.523599
-texture = ExtResource( 11 )
+texture = ExtResource( 13 )
 offset = Vector2( -30.8005, 1.02665 )
 
 [node name="LegFront" type="Sprite" parent="Sprites/Body"]
 position = Vector2( 18.1445, 32.4246 )
 rotation = -0.523599
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 offset = Vector2( -3.31158, 32.8779 )
 
 [node name="LegBehind" type="Sprite" parent="Sprites/Body"]
@@ -564,39 +859,47 @@ modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
 position = Vector2( -9.41391, 27.5614 )
 rotation = -0.523599
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 offset = Vector2( -3.31158, 32.8779 )
 
 [node name="MiniCactus01" type="Sprite" parent="Sprites/Body"]
 visible = false
 position = Vector2( 5.85207, -39.0141 )
 rotation = 0.959931
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 [node name="MiniCactus02" type="Sprite" parent="Sprites/Body"]
 visible = false
 position = Vector2( -117.53, -143.377 )
 rotation = -0.349066
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 [node name="MiniCactus03" type="Sprite" parent="Sprites/Body"]
 visible = false
 position = Vector2( -51.7424, 41.2086 )
 rotation = 3.83972
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 [node name="MiniCactus04" type="Sprite" parent="Sprites/Body"]
 visible = false
 position = Vector2( 70.1034, 36.1124 )
 rotation = 2.44346
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
+
+[node name="MiniCactus05" type="Sprite" parent="Sprites/Body"]
+visible = false
+position = Vector2( -158.161, -77.7676 )
+rotation = 4.71239
+texture = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
 root_node = NodePath("../Body")
+anims/Dying = SubResource( 6 )
 anims/Falling = SubResource( 2 )
 anims/GettingUp = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 anims/Running = SubResource( 1 )
+anims/Vanishing = SubResource( 7 )
 
 [node name="Area" type="Area2D" parent="."]
 editor/display_folded = true
@@ -617,7 +920,12 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Dead" type="Timer" parent="Timers"]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="animation_finished" from="Sprites/AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_shape_entered" from="Area" to="." method="_on_cactus_collision"]
 [connection signal="timeout" from="Timers/Idle" to="." method="_on_Idle_timeout"]
 [connection signal="timeout" from="Timers/OnGround" to="." method="_on_OnGround_timeout"]
+[connection signal="timeout" from="Timers/Dead" to="." method="_on_Dead_timeout"]
