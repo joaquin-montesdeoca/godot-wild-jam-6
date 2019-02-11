@@ -11,4 +11,4 @@ func mouse_clicked() -> void:
 		cut()
 
 func cut():
-	owner.set_status(owner.STATUS.NOTHING)
+	owner.set_status(owner.STATUS.EMPTY)
