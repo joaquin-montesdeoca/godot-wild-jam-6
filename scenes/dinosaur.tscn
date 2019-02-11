@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/Dinosaur/Body.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Dinosaur/EyePupil.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Dinosaur/Arm.png" type="Texture" id=3]
+[ext_resource path="res://sprites/Dinosaur/Foot.png" type="Texture" id=4]
+
+[node name="Dinosaur" type="Node2D"]
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 25.3965, 40.0624 )
+texture = ExtResource( 1 )
+offset = Vector2( -34.1233, -46.2225 )
+
+[node name="Eye" type="Sprite" parent="Body"]
+position = Vector2( -64.5403, -111.502 )
+texture = ExtResource( 2 )
+
+[node name="ArmFront" type="Sprite" parent="Body"]
+position = Vector2( -41.0674, 3.08005 )
+texture = ExtResource( 3 )
+offset = Vector2( -30.2872, -1.0267 )
+
+[node name="ArmBehind" type="Sprite" parent="Body"]
+self_modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
+show_behind_parent = true
+position = Vector2( -54.9276, -12.8335 )
+texture = ExtResource( 3 )
+offset = Vector2( -30.8005, 1.02665 )
+
+[node name="LegFront" type="Sprite" parent="Body"]
+position = Vector2( 18.1445, 32.4246 )
+texture = ExtResource( 4 )
+offset = Vector2( -3.31158, 32.8779 )
+
+[node name="LegBehind" type="Sprite" parent="Body"]
+modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
+show_behind_parent = true
+position = Vector2( -9.41391, 27.5614 )
+texture = ExtResource( 4 )
+offset = Vector2( -3.31158, 32.8779 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Body")
+
