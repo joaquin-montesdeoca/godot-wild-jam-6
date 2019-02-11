@@ -231,6 +231,6 @@ item_type = 2
 scale = Vector2( 0.27, 0.27 )
 
 [node name="Dinosaur" parent="." instance=ExtResource( 8 )]
-position = Vector2( 918.978, 117.879 )
+position = Vector2( 963.084, 112.463 )
 scale = Vector2( 0.35, 0.35 )
 

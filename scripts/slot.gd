@@ -7,6 +7,7 @@ enum STATUS {
 	CACTUS_3 = 3,
 	CACTUS_4 = 4,
 	CACTUS_5 = 5,
+	BROKEN = 6,
 }
 
 onready var status : int = STATUS.EMPTY setget set_status
@@ -17,6 +18,7 @@ onready var states : Dictionary = {
 	STATUS.CACTUS_3 : $States/Cactus3,
 	STATUS.CACTUS_4 : $States/Cactus4,
 	STATUS.CACTUS_5 : $States/Cactus5,
+	STATUS.BROKEN : $States/Broken,
 }
 
 onready var game = get_node("/root/game")
@@ -39,21 +41,29 @@ func setup_state_machine() -> void:
 		setup_state(states[key])
 
 func setup_state(state : Node) -> void:
-	state.set_sprites({
-		STATUS.CACTUS_1 : $Sprites/CactusPhase01,
-		STATUS.CACTUS_2 : $Sprites/CactusPhase02,
-		STATUS.CACTUS_3 : $Sprites/CactusPhase03,
-		STATUS.CACTUS_4 : $Sprites/CactusPhase04,
-		STATUS.CACTUS_5 : $Sprites/CactusPhase05,
+	state.set_normal_sprites({
+		STATUS.CACTUS_1 : $Sprites/Normal/CactusPhase01,
+		STATUS.CACTUS_2 : $Sprites/Normal/CactusPhase02,
+		STATUS.CACTUS_3 : $Sprites/Normal/CactusPhase03,
+		STATUS.CACTUS_4 : $Sprites/Normal/CactusPhase04,
+		STATUS.CACTUS_5 : $Sprites/Normal/CactusPhase05,
+	})
+	state.set_broken_sprites({
+		STATUS.CACTUS_1 : $Sprites/Broken/CactusPhase01,
+		STATUS.CACTUS_2 : $Sprites/Broken/CactusPhase02,
+		STATUS.CACTUS_3 : $Sprites/Broken/CactusPhase03,
+		STATUS.CACTUS_4 : $Sprites/Broken/CactusPhase04,
+		STATUS.CACTUS_5 : $Sprites/Broken/CactusPhase05,
 	})
 	state.set_timer({
 		"GrowUp" : $Timers/GrowUp,
 	})
 
 func set_status(value : int) -> void:
+	var prev_status : int = status
 	status = value
 	
-	states[status].start()
+	states[status].start(prev_status)
 
 func mouse_clicked() -> void:
 	states[status].mouse_clicked()
@@ -74,6 +84,12 @@ func pop_up_cactus() -> void:
 	pop_up.connect("collected", self, "on_collected_cactus")
 	
 	pop_up.jump()
+
+func damage() -> void:
+	states[status].damage()
+
+func set_collision_disabled(value : bool) -> void:
+	$AreaCactus/Collision.disabled = value
 
 func _on_Slot_mouse_entered():
 	hovering = true

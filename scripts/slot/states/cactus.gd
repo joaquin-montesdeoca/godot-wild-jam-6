@@ -1,10 +1,11 @@
 extends "../states.gd"
 
-func start() -> void:
-	.start()
+func start(prev_status : int) -> void:
+	.start(prev_status)
 	
-	sprites[owner.status].modulate = Color(1, 1, 1, 1)
-	sprites[owner.status].visible = true
+	owner.set_collision_disabled(false)
+	normal_sprites[owner.status].modulate = Color(1, 1, 1, 1)
+	normal_sprites[owner.status].visible = true
 	start_growing()
 
 func start_growing() -> void:

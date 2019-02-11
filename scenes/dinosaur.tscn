@@ -501,7 +501,8 @@ __meta__ = {
 
 [node name="Body" type="Sprite" parent="Sprites"]
 editor/display_folded = true
-position = Vector2( 25.3965, 43.9004 )
+position = Vector2( 25.3965, 91.0624 )
+rotation = -0.785398
 texture = ExtResource( 2 )
 offset = Vector2( -34.1233, -46.2225 )
 
@@ -511,7 +512,7 @@ texture = ExtResource( 3 )
 
 [node name="ArmFront" type="Sprite" parent="Sprites/Body"]
 position = Vector2( -41.0674, 3.08005 )
-rotation = 0.10472
+rotation = 0.523599
 texture = ExtResource( 4 )
 offset = Vector2( -30.2872, -1.0267 )
 
@@ -519,21 +520,21 @@ offset = Vector2( -30.2872, -1.0267 )
 self_modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
 position = Vector2( -54.9276, -12.8335 )
-rotation = -0.10472
+rotation = 0.523599
 texture = ExtResource( 4 )
 offset = Vector2( -30.8005, 1.02665 )
 
 [node name="LegFront" type="Sprite" parent="Sprites/Body"]
-position = Vector2( 18.1445, 28.4246 )
-rotation = -0.20944
+position = Vector2( 18.1445, 32.4246 )
+rotation = -0.523599
 texture = ExtResource( 5 )
 offset = Vector2( -3.31158, 32.8779 )
 
 [node name="LegBehind" type="Sprite" parent="Sprites/Body"]
 modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
-position = Vector2( -9.41391, 23.5614 )
-rotation = 0.20944
+position = Vector2( -9.41391, 27.5614 )
+rotation = -0.523599
 texture = ExtResource( 5 )
 offset = Vector2( -3.31158, 32.8779 )
 
@@ -570,8 +571,24 @@ anims/Running = SubResource( 1 )
 
 [node name="Area" type="Area2D" parent="."]
 editor/display_folded = true
+collision_layer = 4
+collision_mask = 2
 
 [node name="Collision" type="CollisionShape2D" parent="Area"]
 position = Vector2( 1.05267, 26.3158 )
 shape = SubResource( 5 )
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="Idle" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="OnGround" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="Sprites/AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="area_shape_entered" from="Area" to="." method="_on_cactus_collision"]
+[connection signal="timeout" from="Timers/Idle" to="." method="_on_Idle_timeout"]
+[connection signal="timeout" from="Timers/OnGround" to="." method="_on_OnGround_timeout"]
