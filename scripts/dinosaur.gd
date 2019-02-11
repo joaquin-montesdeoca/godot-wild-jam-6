@@ -10,6 +10,15 @@ enum STATUS {
 	DYING
 }
 
+onready var states : Dictionary = {
+	STATUS.RUNNING : $States/Running,
+	STATUS.FALLING : $States/Falling,
+	STATUS.ON_GROUND : $States/OnGround,
+	STATUS.GETTING_UP : $States/GettingUp,
+	STATUS.TAKING_A_BREATH : $States/TakingABreath,
+	STATUS.DYING : $States/Dying,
+}
+
 const EYE_PUPIL = preload("res://sprites/Dinosaur/EyePupil.png")
 
 const SPEED = 50
@@ -18,46 +27,41 @@ var status = STATUS.RUNNING
 var default_eye = EYE_PUPIL
 
 func _ready() -> void:
+	setup_state_machine()
+	
 	set_status(STATUS.RUNNING)
+
+func setup_state_machine() -> void:
+	setup_state($States)
+	for key in states:
+		setup_state(states[key])
+
+func setup_state(state : Node) -> void:
+	state.set_sprites({
+		"animation" : $Sprites/AnimationPlayer,
+		"eye" : $Sprites/Body/Eye,
+	})
+	state.set_timers({
+		"Idle" : $Timers/Idle,
+		"OnGround" : $Timers/OnGround,
+	})
 
 func set_status(value : int) -> void:
 	status = value
-	if status == STATUS.RUNNING:
-		$Sprites/Body/Eye.set_texture(default_eye)
-		$Sprites/AnimationPlayer.play("Running")
-	elif status == STATUS.FALLING:
-		$Sprites/AnimationPlayer.play("Falling")
-	elif status == STATUS.ON_GROUND:
-		$Timers/OnGround.start()
-	elif status == STATUS.GETTING_UP:
-		$Sprites/AnimationPlayer.play("GettingUp")
-	elif status == STATUS.TAKING_A_BREATH:
-		$Timers/Idle.start()
-		$Sprites/AnimationPlayer.play("Idle")
+	states[status].start()
 
 func damage(value : int) -> void:
-	if status == STATUS.RUNNING:
-		if value > 0:
-			energy -= value
-			if energy <= 0:
-				energy = 0
-			set_status(STATUS.FALLING)
+	states[status].damage(value)
 
 func _physics_process(delta : float) -> void:
-	if status == STATUS.RUNNING:
-		position.x -= SPEED * delta
-	elif status == STATUS.FALLING:
-		position.x -= SPEED * delta
+	states[status].process(delta)
 
 func _on_cactus_collision(area_id, area, area_shape, self_shape):
 	area.owner.damage()
 	set_status(STATUS.FALLING)
 
 func _on_animation_finished(anim_name):
-	if status == STATUS.FALLING:
-		set_status(STATUS.ON_GROUND)
-	elif status == STATUS.GETTING_UP:
-		set_status(STATUS.TAKING_A_BREATH)
+	states[status].animation_finished()
 
 func _on_OnGround_timeout():
 	set_status(STATUS.GETTING_UP)
