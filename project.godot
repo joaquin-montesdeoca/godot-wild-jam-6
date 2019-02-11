@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Dinosaur",
+"language": "GDScript",
+"path": "res://scripts/dinosaur.gd"
+}, {
 "base": "CanvasLayer",
 "class": "GUI",
 "language": "GDScript",
 "path": "res://scripts/gui.gd"
 } ]
 _global_script_class_icons={
+"Dinosaur": "",
 "GUI": ""
 }
 
@@ -27,6 +33,12 @@ config/icon="res://icon.png"
 [autoload]
 
 game="*res://scripts/singletons/game.gd"
+
+[layer_names]
+
+2d_physics/layer_1="Miscellaneous"
+2d_physics/layer_2="CactusArea"
+2d_physics/layer_3="DinosaurArea"
 
 [rendering]
 

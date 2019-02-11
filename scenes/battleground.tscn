@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/battleground.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Background.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/CactusPhase01.png" type="Texture" id=6]
 [ext_resource path="res://sprites/Scissors.png" type="Texture" id=7]
+[ext_resource path="res://scenes/dinosaur.tscn" type="PackedScene" id=8]
 
 [node name="BattleGround" type="Node2D"]
 script = ExtResource( 1 )
@@ -223,8 +224,13 @@ scale = Vector2( 0.4, 0.4 )
 icon = ExtResource( 7 )
 offset = null
 label_enabled = null
+label_text = ""
 item_type = 2
 
 [node name="Cursor" type="Sprite" parent="GUI"]
 scale = Vector2( 0.27, 0.27 )
+
+[node name="Dinosaur" parent="." instance=ExtResource( 8 )]
+position = Vector2( 918.978, 117.879 )
+scale = Vector2( 0.35, 0.35 )
 
