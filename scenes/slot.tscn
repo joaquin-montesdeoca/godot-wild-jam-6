@@ -138,7 +138,6 @@ shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
 [node name="AreaCactus" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 4
 

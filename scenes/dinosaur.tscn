@@ -822,11 +822,9 @@ script = ExtResource( 10 )
 
 [node name="Sprites" type="Node2D" parent="."]
 editor/display_folded = true
-modulate = Color( 1, 1, 1, 0 )
 
 [node name="Body" type="Sprite" parent="Sprites"]
-position = Vector2( 25.3965, 91.0624 )
-rotation = -0.785398
+position = Vector2( 25.3965, 49.5471 )
 texture = ExtResource( 11 )
 offset = Vector2( -34.1233, -46.2225 )
 
@@ -836,7 +834,7 @@ texture = ExtResource( 12 )
 
 [node name="ArmFront" type="Sprite" parent="Sprites/Body"]
 position = Vector2( -41.0674, 3.08005 )
-rotation = 0.523599
+rotation = -0.247954
 texture = ExtResource( 13 )
 offset = Vector2( -30.2872, -1.0267 )
 
@@ -844,21 +842,21 @@ offset = Vector2( -30.2872, -1.0267 )
 self_modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
 position = Vector2( -54.9276, -12.8335 )
-rotation = 0.523599
+rotation = 0.247954
 texture = ExtResource( 13 )
 offset = Vector2( -30.8005, 1.02665 )
 
 [node name="LegFront" type="Sprite" parent="Sprites/Body"]
-position = Vector2( 18.1445, 32.4246 )
-rotation = -0.523599
+position = Vector2( 8.67333, 22.9535 )
+rotation = 0.495908
 texture = ExtResource( 14 )
 offset = Vector2( -3.31158, 32.8779 )
 
 [node name="LegBehind" type="Sprite" parent="Sprites/Body"]
 modulate = Color( 0.847059, 0.847059, 0.847059, 1 )
 show_behind_parent = true
-position = Vector2( -9.41391, 27.5614 )
-rotation = -0.523599
+position = Vector2( 0.05723, 18.0903 )
+rotation = -0.495908
 texture = ExtResource( 14 )
 offset = Vector2( -3.31158, 32.8779 )
 
@@ -902,7 +900,6 @@ anims/Running = SubResource( 1 )
 anims/Vanishing = SubResource( 7 )
 
 [node name="Area" type="Area2D" parent="."]
-editor/display_folded = true
 collision_layer = 4
 collision_mask = 2
 

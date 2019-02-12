@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 game="*res://scripts/singletons/game.gd"
+random="*res://scripts/singletons/random.gd"
 
 [layer_names]
 

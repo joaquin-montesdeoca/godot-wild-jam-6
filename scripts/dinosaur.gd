@@ -56,6 +56,7 @@ func setup_state(state : Node) -> void:
 		"OnGround" : $Timers/OnGround,
 		"Dead" : $Timers/Dead,
 	})
+	state.set_collision($Area/Collision)
 
 func set_status(value : int) -> void:
 	status = value

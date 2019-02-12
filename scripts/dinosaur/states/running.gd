@@ -7,6 +7,9 @@ func start() -> void:
 	sprites["Eye"].set_texture(owner.default_eye)
 	sprites["Animation"].play("Running")
 
+func setup_collision() -> void:
+	collision.disabled = false
+
 func damage(value : int) -> void:
 	if value > 0:
 		owner.energy -= value
