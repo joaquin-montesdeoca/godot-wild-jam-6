@@ -16,6 +16,9 @@ func set_random_array(value : Array) -> void:
 	random_array = value
 	original_random_array = value.duplicate()
 
+func reset_random_array() -> void:
+	random_array = original_random_array.duplicate()
+
 func draw_from_random_array():
 	if random_array.size() == 0:
 		if original_random_array.size() > 0:

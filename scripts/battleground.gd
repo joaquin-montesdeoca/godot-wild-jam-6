@@ -1,9 +1,11 @@
 extends Node2D
 
+const END_OF_WAVES = -1
+
 onready var game = get_node("/root/game")
 onready var random = get_node("/root/random")
 var waves : Array
-var current_wave = 0
+var current_wave : int = 0
 var dinosaur_scene = preload("res://scenes/dinosaur.tscn")
 
 func _ready():
@@ -33,18 +35,23 @@ func spawn_wave() -> void:
 	var wave : Dictionary = waves[current_wave]
 	
 	for i in range(wave["number"]):
-		spawn_dinosaur()
-	
-	setup_timer(wave["time"])
-	
-	current_wave += 1
+		spawn_dinosaur(i)
 
-func spawn_dinosaur() -> void:
+	setup_next_wave()
+
+func setup_next_wave() -> void:
+	current_wave += 1
+	if current_wave < waves.size():
+		setup_timer(waves[current_wave]["time"])
+	else:
+		current_wave = END_OF_WAVES
+
+func spawn_dinosaur(spawn_number : int) -> void:
 	var line : int = random.draw_from_random_array()
 	
 	var dinosaur = dinosaur_scene.instance()
 	dinosaur.scale = Vector2(0.35, 0.35)
-	dinosaur.position.x = 1100 + random.get_rand_int(0, 500)
+	dinosaur.position.x = 1100 + 100 * spawn_number
 	dinosaur.position.y = get_line_vertical_position(line)
 	
 	add_child(dinosaur)
