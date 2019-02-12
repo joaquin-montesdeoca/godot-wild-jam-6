@@ -11,6 +11,7 @@ func mouse_clicked() -> void:
 
 func plant() -> void:
 	game.add_cacti(-1)
+	game.update_cacti_gui()
 	owner.set_status(owner.STATUS.CACTUS_1)
 
 func mouse_entered() -> void:

@@ -52,8 +52,10 @@ func set_num_cacti(value : int) -> bool:
 	num_cacti = value
 	if num_cacti == 0 and item_selected == ITEM_SELECTED.CACTUS:
 		set_item_selected(ITEM_SELECTED.NOTHING)
-	gui.set_cacti_number(num_cacti)
 	return true
+
+func update_cacti_gui():
+	gui.set_cacti_number(num_cacti)
 
 func add_cacti(value : int) -> void:
 	var result : int = num_cacti + value

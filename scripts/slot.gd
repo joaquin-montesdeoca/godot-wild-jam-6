@@ -81,7 +81,8 @@ func pop_up_cactus() -> void:
 	
 	game.get_gui().add_child(pop_up)
 	
-	pop_up.connect("collected", self, "on_collected_cactus")
+	pop_up.connect("collected", self, "on_collected_popup_cactus")
+	pop_up.connect("clicked", self, "on_clicked_popup_cactus")
 	
 	pop_up.jump()
 
@@ -105,8 +106,11 @@ func _on_Slot_mouse_exited():
 func on_item_selected_changed(item_selected : int):
 	states[status].item_selected_changed()
 
-func on_collected_cactus():
+func on_clicked_popup_cactus():
 	game.add_cacti(1)
+
+func on_collected_popup_cactus():
+	game.update_cacti_gui()
 
 func _on_GrowUp_timeout():
 	states[status].grow_up()

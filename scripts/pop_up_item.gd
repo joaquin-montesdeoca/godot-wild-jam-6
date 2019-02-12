@@ -1,5 +1,6 @@
 extends Node2D
 
+signal clicked
 signal collected
 
 var rect_extends : = Vector2()
@@ -44,11 +45,14 @@ func click() -> void:
 	if status == STATUS.FLOATING:
 		if game.get_item_selected() == game.ITEM_SELECTED.NOTHING:
 			if not on_click_action.has("action"):
+				emit_signal("clicked")
 				emit_signal("collected")
 				queue_free()
 			elif on_click_action["action"] == "dissapear":
+				emit_signal("clicked")
 				dissapear()
 			elif on_click_action["action"] == "go_to":
+				emit_signal("clicked")
 				go_to_point(on_click_action["point"])
 
 func on_click_dissapear() -> void:

@@ -9,6 +9,7 @@ var dinosaur_scene = preload("res://scenes/dinosaur.tscn")
 func _ready():
 	game.set_battleground(self)
 	game.set_num_cacti(1)
+	game.update_cacti_gui()
 
 	random.set_random_array([1,2,3,4,5])
 	setup_waves()
@@ -35,13 +36,15 @@ func spawn_wave() -> void:
 		spawn_dinosaur()
 	
 	setup_timer(wave["time"])
+	
+	current_wave += 1
 
 func spawn_dinosaur() -> void:
 	var line : int = random.draw_from_random_array()
 	
 	var dinosaur = dinosaur_scene.instance()
 	dinosaur.scale = Vector2(0.35, 0.35)
-	dinosaur.position.x = 1100 + random.get_rand_int(0, 200)
+	dinosaur.position.x = 1100 + random.get_rand_int(0, 500)
 	dinosaur.position.y = get_line_vertical_position(line)
 	
 	add_child(dinosaur)

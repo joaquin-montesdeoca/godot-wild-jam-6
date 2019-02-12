@@ -12,6 +12,11 @@ func _input(event : InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			game.set_item_selected(game.ITEM_SELECTED.NOTHING)
+	else:
+		if event.is_action_pressed("ui_cactus"):
+			game.set_item_selected(game.ITEM_SELECTED.CACTUS)
+		elif event.is_action_pressed("ui_scissors"):
+			game.set_item_selected(game.ITEM_SELECTED.SCISSORS)
 
 func set_cacti_number(value : int):
 	$Buttons/Cactus.set_label_text(str(value))
