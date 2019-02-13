@@ -15,17 +15,20 @@ func _ready():
 
 	random.set_random_array([1,2,3,4,5])
 	setup_waves()
-	setup_timer(20.0)
+	start_waves()
 
 func setup_waves() -> void:
 	waves = [
 		{"time" : 20.0, "number" : 1},
+		{"time" : 20.0, "number" : 1},
+		{"time" : 15.0, "number" : 1},
 		{"time" : 20.0, "number" : 2},
-		{"time" : 20.0, "number" : 4},
-		{"time" : 20.0, "number" : 6},
-		{"time" : 20.0, "number" : 9},
-		{"time" : 20.0, "number" : 12},
+		{"time" : 20.0, "number" : 2},
 	]
+
+func start_waves() -> void:
+	current_wave = 0
+	setup_timer(waves[0]["time"])
 
 func setup_timer(time : float) -> void:
 	$Timers/Waves.set_wait_time(time)

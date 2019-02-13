@@ -12,6 +12,7 @@ export(Vector2) var offset setget set_offset
 export(bool) var label_enabled setget set_label_enabled
 export(String) var label_text = "" setget set_label_text
 export(ITEM_TYPE) var item_type = ITEM_TYPE.NOTHING setget set_item_type, get_item_type
+export(String) var key_text = "" setget set_key_text
 
 onready var initial_scale : Vector2 = scale
 onready var hovering : bool = false
@@ -42,6 +43,10 @@ func set_item_type(value : int) -> void:
 func get_item_type() -> int:
 	return item_type
 
+func set_key_text(value : String) -> void:
+	key_text = value
+	$Sprites/KeyLabelSprite/CenterContainer/Label.set_text(key_text)
+
 func _input(event : InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -56,17 +61,22 @@ func _on_Button_mouse_entered():
 	
 	hovering = true
 
-	var from : Vector2 = initial_scale
-	var to : Vector2 = initial_scale * 1.2
+	var from_scale : Vector2 = initial_scale
+	var to_scale : Vector2 = initial_scale * 1.2
+	
+	var from_alpha : float = 0.0
+	var to_alpha : float = 1.0
+	
 	var time : float = 0.2
 	
-	if scale > from:
-		var scale_2_to = scale.distance_to(to)
-		var from_2_to = from.distance_to(to)
-		time = scale_2_to * time / from_2_to # Regla de tres simple
-		from = scale # Inicia desde la escala actual
+	if scale > from_scale:
+		time = get_time_for_scale(from_scale, to_scale, time)
+		from_scale = scale # Inicia desde la escala actual
+	if modulate.a < from_alpha:
+		from_alpha = modulate.a # Inicia desde el alpha actual
 	
-	zoom_animation(from, to, time)
+	zoom_animation(from_scale, to_scale, time)
+	key_label_animation(from_alpha, to_alpha, time)
 
 func _on_Button_mouse_exited():
 	if Engine.is_editor_hint():
@@ -74,16 +84,26 @@ func _on_Button_mouse_exited():
 	
 	hovering = false
 	
-	var from : Vector2 = initial_scale * 1.2
-	var to : Vector2 = initial_scale
-	var time : float = 0.2
-	if scale < from:
-		var scale_2_to = scale.distance_to(to)
-		var from_2_to = from.distance_to(to)
-		time = scale_2_to * time / from_2_to # Regla de tres simple
-		from = scale # Inicia desde la escala actual
+	var from_scale : Vector2 = initial_scale * 1.2
+	var to_scale : Vector2 = initial_scale
 	
-	zoom_animation(from, to, time)
+	var from_alpha : float = 1.0
+	var to_alpha : float = 0.0
+	
+	var time : float = 0.2
+	if scale < from_scale:
+		time = get_time_for_scale(from_scale, to_scale, time)
+		from_scale = scale # Inicia desde la escala actual
+	if modulate.a > from_alpha:
+		from_alpha = modulate.a # Inicia desde el alpha actual
+	
+	zoom_animation(from_scale, to_scale, time)
+	key_label_animation(from_alpha, to_alpha, time)
+
+func get_time_for_scale(from : Vector2, to : Vector2, time : float) -> float:
+	var scale_2_to = scale.distance_to(to)
+	var from_2_to = from.distance_to(to)
+	return scale_2_to * time / from_2_to # Regla de tres simple
 
 func zoom_animation(from : Vector2, to : Vector2, time : float) -> void:
 	if Engine.is_editor_hint():
@@ -93,6 +113,22 @@ func zoom_animation(from : Vector2, to : Vector2, time : float) -> void:
 	$Tween.interpolate_property(
 		self,
 		"scale",
+		from,
+		to,
+		time,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+	)
+	$Tween.start()
+
+func key_label_animation(from : float, to : float, time : float) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	$Tween.stop($Sprites/KeyLabelSprite, "modulate:a")
+	$Tween.interpolate_property(
+		$Sprites/KeyLabelSprite,
+		"modulate:a",
 		from,
 		to,
 		time,
