@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Cacti vs Dinosaurs"
-run/main_scene="res://scenes/battleground.tscn"
+run/main_scene="res://scenes/start.tscn"
 config/icon="res://icon.png"
 
 [autoload]
