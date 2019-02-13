@@ -4,17 +4,17 @@
 [ext_resource path="res://sprites/Inicio.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Oleander Cakes.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=1]
 
 font_path = "res://fonts/Oleander Cakes.ttf"
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 
 size = 100
 outline_size = 5
 outline_color = Color( 0.0509804, 0.133333, 0.117647, 1 )
 use_filter = true
-font_data = SubResource( 6 )
+font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFontData" id=3]
 
@@ -36,13 +36,13 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 
 size = 50
 outline_size = 5
 outline_color = Color( 0.0509804, 0.133333, 0.117647, 1 )
 use_filter = true
-font_data = SubResource( 6 )
+font_data = SubResource( 1 )
 
 [node name="Start" type="Node2D"]
 script = ExtResource( 1 )
@@ -55,6 +55,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0
@@ -75,7 +76,7 @@ custom_constants/separation = 20
 [node name="Cactus" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
 margin_right = 230.0
 margin_bottom = 125.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.188235, 0.388235, 0.34902, 1 )
 custom_colors/font_color_shadow = Color( 0.0509804, 0.133333, 0.117647, 1 )
 custom_constants/shadow_offset_x = 8
@@ -87,7 +88,7 @@ align = 1
 margin_left = 250.0
 margin_right = 341.0
 margin_bottom = 125.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 8
@@ -163,7 +164,7 @@ align = 2
 margin_top = 461.0
 margin_right = 824.0
 margin_bottom = 524.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.270588, 0.560784, 0.505882, 1 )
 custom_colors/font_color_shadow = Color( 0.0509804, 0.133333, 0.117647, 1 )
 custom_constants/shadow_offset_x = 6
@@ -172,6 +173,25 @@ text = "Made by WormLlama"
 align = 2
 valign = 2
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BlackTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [connection signal="pressed" from="Control/VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="timeout" from="BlackTimer" to="." method="_on_BlackTimer_timeout"]

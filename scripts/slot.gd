@@ -1,4 +1,5 @@
 extends Area2D
+class_name Slot
 
 enum STATUS {
 	EMPTY = 0,

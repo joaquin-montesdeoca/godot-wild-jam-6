@@ -2,11 +2,15 @@ extends CanvasLayer
 class_name GUI
 
 onready var game = get_node("/root/game")
+var game_over = false
 
 func _ready():
 	game.set_gui(self)
 
 func _input(event : InputEvent) -> void:
+	if game_over:
+		return
+	
 	if event is InputEventMouseMotion:
 		$Cursor.position = event.position
 	elif event is InputEventMouseButton:
@@ -33,3 +37,27 @@ func set_item_selected(item_selected : int) -> void:
 	elif item_selected == game.ITEM_SELECTED.SCISSORS:
 		$Cursor.texture = $Buttons/Scissors.get_icon()
 		$Cursor.scale = Vector2(0.5, 0.5)
+
+func pre_game_over() -> void:
+	game_over = true
+	$Buttons.visible = false
+	$Cursor.visible = false
+
+func game_over() -> void:
+	$ColorRect.modulate = Color("#00ffffff")
+	$ColorRect.show()
+	$ColorRect/Container/Label.set_text("GAME OVER")
+	$ColorRect/Container/Label.show()
+	
+	$Tween.interpolate_property($ColorRect, ":modulate:a", 0.0, 1.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+
+func _on_tween_completed(object, key):
+	if object is ColorRect:
+		$GameOverTimer.start()
+	elif object is Label:
+		game.go_to_start()
+
+func _on_GameOverTimer_timeout():
+	$Tween.interpolate_property($ColorRect/Container/Label, ":modulate:a", 1.0, 0.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()

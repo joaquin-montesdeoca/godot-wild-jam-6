@@ -69,6 +69,9 @@ func _physics_process(delta : float) -> void:
 	states[status].process(delta)
 
 func _on_cactus_collision(area_id, area, area_shape, self_shape):
+	if not area.owner is Slot:
+		return
+	
 	states[status].cactus_collision(area.owner)
 
 func _on_animation_finished(anim_name):

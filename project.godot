@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GUI",
 "language": "GDScript",
 "path": "res://scripts/gui.gd"
+}, {
+"base": "Area2D",
+"class": "Slot",
+"language": "GDScript",
+"path": "res://scripts/slot.gd"
 } ]
 _global_script_class_icons={
 "Dinosaur": "",
-"GUI": ""
+"GUI": "",
+"Slot": ""
 }
 
 [application]
@@ -53,6 +59,7 @@ ui_scissors={
 2d_physics/layer_1="Miscellaneous"
 2d_physics/layer_2="CactusArea"
 2d_physics/layer_3="DinosaurArea"
+2d_physics/layer_4="DinosaurGoalArea"
 
 [rendering]
 

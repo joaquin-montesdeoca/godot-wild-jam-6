@@ -71,3 +71,22 @@ func get_line_vertical_position(line : int) -> float:
 
 func _on_Waves_timeout():
 	spawn_wave()
+
+func _on_dinosaur_reached_goal(area_id, area, area_shape, self_shape):
+	$GUI.pre_game_over()
+	
+	#var fromZoom : Vector2 = $Camera.zoom
+	var toZoom : Vector2 = Vector2(0.25,0.25)
+	
+	#var fromPos : Vector2 = $Camera.position
+	var toPos : Vector2 = Vector2(128.0, area.owner.position.y)
+	
+	$Camera.zoom = toZoom
+	$Camera.position = toPos
+	
+	#$Tween.interpolate_property($Camera, ":zoom", fromZoom, toZoom, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	#$Tween.interpolate_property($Camera, ":position", fromPos, toPos, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	#$Tween.start()
+
+func _on_dinosaur_left_goal(area_id, area, area_shape, self_shape):
+	$GUI.game_over()

@@ -26,6 +26,14 @@ func set_battleground(value : Node2D) -> void:
 func get_battleground() -> Node2D:
 	return battleground
 
+func go_to_start() -> void:
+	battleground = null
+	slots.clear()
+	item_selected = ITEM_SELECTED.NOTHING
+	num_cacti = 0
+	
+	get_tree().change_scene("res://scenes/start.tscn")
+
 func add_slot(slot : Node2D):
 	self.connect("item_selected_changed", slot, "on_item_selected_changed")
 	slots.append(slot)

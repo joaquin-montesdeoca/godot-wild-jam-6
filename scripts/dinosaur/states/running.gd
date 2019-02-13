@@ -31,9 +31,9 @@ func show_damage() -> void:
 	if owner.energy < 1:
 		sprites["MiniCactus05"].show()
 
-func cactus_collision(slot : Object) -> void:
-	damage(slot.get_damage())
-	slot.damage()
+func cactus_collision(body : Object) -> void:
+	damage(body.get_damage())
+	body.damage()
 
 func process(delta : float) -> void:
 	owner.position.x -= owner.SPEED * delta
