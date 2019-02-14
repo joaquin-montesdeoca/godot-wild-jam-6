@@ -1,7 +1,11 @@
 extends Node2D
 
+onready var game = get_node("/root/game")
+
 func _ready():
-	$ColorRect.show()
+	if not game.just_started():
+		$ColorRect.show()
+		$BlackTimer.start()
 
 func _on_New_pressed():
 	get_tree().change_scene("res://scenes/battleground.tscn")

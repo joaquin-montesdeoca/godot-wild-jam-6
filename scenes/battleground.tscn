@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/battleground.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Background.png" type="Texture" id=2]
 [ext_resource path="res://scenes/slot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/gui.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/dinosaur.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -229,12 +228,6 @@ collision_mask = 4
 [node name="Collision" type="CollisionShape2D" parent="DinosaurGoal"]
 position = Vector2( 31.4405, 48.3024 )
 shape = SubResource( 1 )
-
-[node name="Dinosaurs" type="Node2D" parent="."]
-
-[node name="Dinosaur" parent="Dinosaurs" instance=ExtResource( 5 )]
-position = Vector2( 118.932, 219.408 )
-scale = Vector2( 0.35, 0.35 )
 
 [connection signal="timeout" from="Timers/Waves" to="." method="_on_Waves_timeout"]
 [connection signal="area_shape_entered" from="DinosaurGoal" to="." method="_on_dinosaur_reached_goal"]

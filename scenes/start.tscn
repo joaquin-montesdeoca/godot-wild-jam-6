@@ -177,7 +177,6 @@ valign = 2
 
 [node name="BlackTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

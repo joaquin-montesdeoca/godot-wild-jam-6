@@ -8,11 +8,24 @@ enum ITEM_SELECTED {
 	SCISSORS = 2,
 }
 
+var just_started : bool = true
+
 var gui : GUI setget set_gui, get_gui
 var battleground : Node2D setget set_battleground, get_battleground
 var slots : Array
 var item_selected : int = ITEM_SELECTED.NOTHING setget set_item_selected, get_item_selected
 var num_cacti : int = 0 setget set_num_cacti, get_num_cacti
+
+"""
+Se llama a esta funcion para ver si el juego ya comenzo.
+Al mismo tiempo, cuando se llama, se setea a false para marcar
+que, la proxima vez que se llama, no acaba de comenzar.
+"""
+func just_started() -> bool:
+	var just_started_value = just_started
+	just_started = false
+	
+	return just_started_value
 
 func set_gui(value : GUI) -> void:
 	gui = value
