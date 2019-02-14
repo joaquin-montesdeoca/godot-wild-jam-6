@@ -220,13 +220,12 @@ current = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="DinosaurGoal" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 256 )
 collision_layer = 8
 collision_mask = 4
 
 [node name="Collision" type="CollisionShape2D" parent="DinosaurGoal"]
-position = Vector2( 31.4405, 48.3024 )
+position = Vector2( 0, 48.302 )
 shape = SubResource( 1 )
 
 [connection signal="timeout" from="Timers/Waves" to="." method="_on_Waves_timeout"]

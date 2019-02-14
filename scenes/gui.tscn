@@ -15,6 +15,7 @@ font_data = ExtResource( 5 )
 script = ExtResource( 1 )
 
 [node name="Buttons" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Cactus" parent="Buttons" instance=ExtResource( 2 )]
 position = Vector2( 50, 50 )
@@ -34,6 +35,8 @@ offset = null
 label_enabled = null
 item_type = 2
 key_text = "W"
+
+[node name="FleeingSprites" type="Node2D" parent="."]
 
 [node name="Cursor" type="Sprite" parent="."]
 scale = Vector2( 0.27, 0.27 )

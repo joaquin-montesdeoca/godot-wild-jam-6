@@ -4,6 +4,8 @@ class_name GUI
 onready var game = get_node("/root/game")
 var game_over = false
 
+var fleeing_sprite_scene = preload("res://scenes/fleeing_sprite.tscn")
+
 func _ready():
 	game.set_gui(self)
 
@@ -40,6 +42,7 @@ func set_item_selected(item_selected : int) -> void:
 
 func pre_game_over() -> void:
 	game_over = true
+	$FleeingSprites.visible = false
 	$Buttons.visible = false
 	$Cursor.visible = false
 
@@ -51,6 +54,12 @@ func game_over() -> void:
 	
 	$Tween.interpolate_property($ColorRect, ":modulate:a", 0.0, 1.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
+
+func add_fleeing_sprite(node : Node2D) -> void:
+	var fleeing_sprite = fleeing_sprite_scene.instance()
+	$FleeingSprites.add_child(fleeing_sprite)
+	fleeing_sprite.duplicate_as_child(node)
+	fleeing_sprite.move_to_point(Vector2(-50, 650))
 
 func _on_tween_completed(object, key):
 	if object is ColorRect:
