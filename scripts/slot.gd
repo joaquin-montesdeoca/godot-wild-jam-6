@@ -94,7 +94,7 @@ func get_damage() -> int:
 	return states[status].get_damage()
 
 func set_collision_disabled(value : bool) -> void:
-	$AreaCactus/Collision.disabled = value
+	$AreaCactus/Collision.call_deferred("set_disabled", value)
 
 func _on_Slot_mouse_entered():
 	hovering = true

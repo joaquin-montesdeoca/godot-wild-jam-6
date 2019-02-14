@@ -20,7 +20,6 @@ __meta__ = {
 }
 
 [node name="Game" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Lines" type="Node2D" parent="Game"]
 

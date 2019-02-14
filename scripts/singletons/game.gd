@@ -8,7 +8,7 @@ enum ITEM_SELECTED {
 	SCISSORS = 2,
 }
 
-var just_started : bool = true
+var it_just_started : bool = true
 
 var gui : GUI setget set_gui, get_gui
 var battleground : Node2D setget set_battleground, get_battleground
@@ -22,10 +22,10 @@ Al mismo tiempo, cuando se llama, se setea a false para marcar
 que, la proxima vez que se llama, no acaba de comenzar.
 """
 func just_started() -> bool:
-	var just_started_value = just_started
-	just_started = false
+	var it_just_started_value = it_just_started
+	it_just_started = false
 	
-	return just_started_value
+	return it_just_started_value
 
 func set_gui(value : GUI) -> void:
 	gui = value

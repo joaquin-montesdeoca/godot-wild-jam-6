@@ -17,7 +17,7 @@ func start() -> void:
 	setup_collision()
 
 func setup_collision() -> void:
-	collision.disabled = true
+	collision.call_deferred("set_disabled", true)
 
 func damage(value : int) -> void:
 	return

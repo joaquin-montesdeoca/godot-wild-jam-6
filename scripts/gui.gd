@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name GUI
 
 onready var game = get_node("/root/game")
-var game_over = false
+var its_game_over = false
 
 var fleeing_sprite_scene = preload("res://scenes/fleeing_sprite.tscn")
 
@@ -10,7 +10,7 @@ func _ready():
 	game.set_gui(self)
 
 func _input(event : InputEvent) -> void:
-	if game_over:
+	if its_game_over:
 		return
 	
 	if event is InputEventMouseMotion:
@@ -41,7 +41,7 @@ func set_item_selected(item_selected : int) -> void:
 		$Cursor.scale = Vector2(0.5, 0.5)
 
 func pre_game_over() -> void:
-	game_over = true
+	its_game_over = true
 	$FleeingSprites.visible = false
 	$Buttons.visible = false
 	$Cursor.visible = false
