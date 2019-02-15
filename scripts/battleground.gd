@@ -4,6 +4,13 @@ const END_OF_WAVES = -1
 
 onready var game = get_node("/root/game")
 onready var random = get_node("/root/random")
+onready var lines = {
+	1: $Game/Lines/Line01,
+	2: $Game/Lines/Line02,
+	3: $Game/Lines/Line03,
+	4: $Game/Lines/Line04,
+	5: $Game/Lines/Line05,
+}
 var waves : Array
 var current_wave : int = 0
 var dinosaur_scene = preload("res://scenes/dinosaur.tscn")
@@ -54,20 +61,10 @@ func spawn_dinosaur(spawn_number : int) -> void:
 	
 	var dinosaur = dinosaur_scene.instance()
 	dinosaur.scale = Vector2(0.35, 0.35)
-	dinosaur.position.x = 1100 + 100 * spawn_number
-	dinosaur.position.y = get_line_vertical_position(line)
+	dinosaur.position.x = 940 + 100 * spawn_number
+	dinosaur.position.y = 40
 	
-	add_child(dinosaur)
-
-func get_line_vertical_position(line : int) -> float:
-	var vertical_position : float
-	match line:
-		1: vertical_position = $Game/Lines/Line01.position.y
-		2: vertical_position = $Game/Lines/Line02.position.y
-		3: vertical_position = $Game/Lines/Line03.position.y
-		4: vertical_position = $Game/Lines/Line04.position.y
-		_: vertical_position = $Game/Lines/Line05.position.y
-	return vertical_position + 40
+	lines[line].add_child(dinosaur)
 
 func _on_Waves_timeout():
 	spawn_wave()
