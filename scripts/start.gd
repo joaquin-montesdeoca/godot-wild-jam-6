@@ -12,6 +12,7 @@ func _ready():
 		$BlackTimer.start()
 
 func _on_New_pressed():
+	game.set_current_level(game.LEVEL.LEVEL1)
 	fade = FADE.IN
 	$ColorRect.show()
 	$Tween.interpolate_property($ColorRect, ":modulate:a", 0.0, 1.0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)

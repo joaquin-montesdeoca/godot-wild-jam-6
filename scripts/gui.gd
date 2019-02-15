@@ -12,6 +12,7 @@ enum TWEEN_ANIMATION {
 	GAME_OVER_LABEL,
 	LEVEL_START,
 	TITLE_VANISH,
+	LEVEL_FINISH,
 }
 var tween_animation : int = TWEEN_ANIMATION.NOTHING
 
@@ -51,8 +52,12 @@ func animate(animation : int) -> void:
 		$Tween.interpolate_property($ColorRect, ":modulate:a", 1.0, 0.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 	elif tween_animation == TWEEN_ANIMATION.TITLE_VANISH:
-		$Tween.interpolate_property($Center/Label, ":modulate:a", 1.0, 0.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.interpolate_property($Center/Label, ":modulate:a", 1.0, 0.0, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
+	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
+		$Tween.interpolate_property($ColorRect, ":modulate:a", 0.0, 1.0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.start()
+
 func set_cacti_number(value : int):
 	$Buttons/Cactus.set_label_text(str(value))
 
