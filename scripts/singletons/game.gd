@@ -7,6 +7,23 @@ enum ITEM_SELECTED {
 	CACTUS = 1,
 	SCISSORS = 2,
 }
+enum LEVEL {
+	TUTORIAL,
+	LEVEL_1,
+	LEVEL_2,
+	LEVEL_3,
+	LEVEL_4,
+	LEVEL_5,
+}
+onready var level_titles : Dictionary = {
+	LEVEL.TUTORIAL : "Tutorial",
+	LEVEL.LEVEL_1 : "Level 1",
+	LEVEL.LEVEL_2 : "Level 2",
+	LEVEL.LEVEL_3 : "Level 3",
+	LEVEL.LEVEL_4 : "Level 4",
+	LEVEL.LEVEL_5 : "Level 5",
+}
+onready var current_level : int = LEVEL.TUTORIAL
 
 var it_just_started : bool = true
 
@@ -38,6 +55,9 @@ func set_battleground(value : Node2D) -> void:
 
 func get_battleground() -> Node2D:
 	return battleground
+
+func get_level_title() -> String:
+	return level_titles[current_level]
 
 func go_to_start() -> void:
 	battleground = null

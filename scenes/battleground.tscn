@@ -22,11 +22,14 @@ __meta__ = {
 [node name="Game" type="Node2D" parent="."]
 
 [node name="Lines" type="Node2D" parent="Game"]
+editor/display_folded = true
 
 [node name="Line01" type="Node2D" parent="Game/Lines"]
+editor/display_folded = true
 position = Vector2( 73.1214, 79.949 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line01"]
+editor/display_folded = true
 
 [node name="Slot01" parent="Game/Lines/Line01/Slots" instance=ExtResource( 3 )]
 
@@ -186,6 +189,7 @@ position = Vector2( 800, 0 )
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line04"]
 
 [node name="Line05" type="Node2D" parent="Game/Lines"]
+editor/display_folded = true
 position = Vector2( 112.46, 479.916 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line05"]
@@ -228,7 +232,6 @@ position = Vector2( 800, 0 )
 [node name="GUI" parent="." instance=ExtResource( 4 )]
 
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Waves" type="Timer" parent="Timers"]
 wait_time = 25.0
@@ -241,6 +244,7 @@ current = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="DinosaurGoal" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 256 )
 collision_layer = 8
 collision_mask = 4
@@ -249,6 +253,7 @@ collision_mask = 4
 position = Vector2( 0, 48.302 )
 shape = SubResource( 1 )
 
+[connection signal="start_level" from="GUI" to="." method="_on_GUI_start_level"]
 [connection signal="timeout" from="Timers/Waves" to="." method="_on_Waves_timeout"]
 [connection signal="area_shape_entered" from="DinosaurGoal" to="." method="_on_dinosaur_reached_goal"]
 [connection signal="area_shape_exited" from="DinosaurGoal" to="." method="_on_dinosaur_left_goal"]

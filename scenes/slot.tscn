@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/slot.gd" type="Script" id=1]
 [ext_resource path="res://scripts/slot/states.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://sprites/BrokenCactusPhase03.png" type="Texture" id=17]
 [ext_resource path="res://sprites/BrokenCactusPhase04.png" type="Texture" id=18]
 [ext_resource path="res://sprites/BrokenCactusPhase05.png" type="Texture" id=19]
+[ext_resource path="res://sprites/CircleGolden.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -91,6 +92,7 @@ scale = Vector2( 0.27, 0.27 )
 texture = ExtResource( 14 )
 
 [node name="Broken" type="Node2D" parent="Sprites"]
+editor/display_folded = true
 
 [node name="CactusPhase01" type="Sprite" parent="Sprites/Broken"]
 visible = false
@@ -128,6 +130,12 @@ scale = Vector2( 0.27, 0.27 )
 texture = ExtResource( 19 )
 
 [node name="Tween" type="Tween" parent="Sprites/Broken"]
+
+[node name="Circle" type="Sprite" parent="Sprites"]
+visible = false
+position = Vector2( 36.776, 72.399 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 20 )
 
 [node name="Timers" type="Node" parent="."]
 editor/display_folded = true

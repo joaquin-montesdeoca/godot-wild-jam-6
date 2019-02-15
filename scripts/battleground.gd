@@ -20,10 +20,6 @@ func _ready():
 	game.set_num_cacti(1)
 	game.update_cacti_gui()
 
-	random.set_random_array([1,2,3,4,5])
-	setup_waves()
-	start_waves()
-
 func setup_waves() -> void:
 	waves = [
 		{"time" : 20.0, "number" : 1},
@@ -44,8 +40,10 @@ func setup_timer(time : float) -> void:
 func spawn_wave() -> void:
 	var wave : Dictionary = waves[current_wave]
 	
-	for i in range(wave["number"]):
-		spawn_dinosaur(i)
+	var line_number : int
+	for spawn_number in range(wave["number"]):
+		line_number = random.draw_from_random_array()
+		spawn_dinosaur(line_number, spawn_number)
 
 	setup_next_wave()
 
@@ -56,15 +54,13 @@ func setup_next_wave() -> void:
 	else:
 		current_wave = END_OF_WAVES
 
-func spawn_dinosaur(spawn_number : int) -> void:
-	var line : int = random.draw_from_random_array()
-	
+func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 	var dinosaur = dinosaur_scene.instance()
 	dinosaur.scale = Vector2(0.35, 0.35)
-	dinosaur.position.x = 940 + 100 * spawn_number
+	dinosaur.global_position.x = 1100 + 100 * spawn_number
 	dinosaur.position.y = 40
 	
-	lines[line].add_child(dinosaur)
+	lines[line_number].add_child(dinosaur)
 
 func _on_Waves_timeout():
 	spawn_wave()
@@ -73,10 +69,15 @@ func _on_dinosaur_reached_goal(area_id, area, area_shape, self_shape):
 	$GUI.pre_game_over()
 	
 	var toZoom : Vector2 = Vector2(0.25,0.25)
-	var toPos : Vector2 = Vector2(128.0, area.owner.position.y)
+	var toPos : Vector2 = Vector2(128.0, area.owner.global_position.y)
 	
 	$Camera.zoom = toZoom
 	$Camera.position = toPos
 
 func _on_dinosaur_left_goal(area_id, area, area_shape, self_shape):
 	$GUI.game_over()
+
+func _on_GUI_start_level():
+	random.set_random_array([1,2,3,4,5])
+	setup_waves()
+	start_waves()

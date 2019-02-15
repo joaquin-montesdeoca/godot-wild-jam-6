@@ -55,7 +55,6 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0
@@ -192,5 +191,5 @@ __meta__ = {
 [connection signal="pressed" from="Control/VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_completed"]
 [connection signal="timeout" from="BlackTimer" to="." method="_on_BlackTimer_timeout"]
