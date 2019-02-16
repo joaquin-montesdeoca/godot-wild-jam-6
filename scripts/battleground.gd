@@ -11,6 +11,7 @@ onready var lines = {
 }
 var dinosaur_scene = preload("res://scenes/dinosaur.tscn")
 var levels : Dictionary
+var num_dinosaurs : int = 0
 onready var current_level : int = game.get_current_level()
 
 func _ready():
@@ -41,7 +42,19 @@ func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 	dinosaur.global_position.x = 1100 + 100 * spawn_number
 	dinosaur.position.y = 40
 	
+	dinosaur.connect("dead", self, "_on_Dinosaur_dead")
+	
 	lines[line_number].add_child(dinosaur)
+	
+	num_dinosaurs += 1
+
+func next_level() -> void:
+	game.set_next_level()
+	
+	if game.get_current_level() == game.LEVEL.YOU_WON:
+		print("You won!")
+	else:
+		$GUI.finish_level()
 
 func _on_Waves_timeout():
 	levels[current_level].spawn_wave()
@@ -60,3 +73,9 @@ func _on_dinosaur_left_goal(area_id, area, area_shape, self_shape):
 
 func _on_GUI_start_level():
 	levels[current_level].start()
+
+func _on_Dinosaur_dead():
+	num_dinosaurs -= 1
+	
+	if num_dinosaurs <= 0 and levels[current_level].waves_concluded():
+		next_level()

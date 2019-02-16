@@ -1,6 +1,8 @@
 extends Node2D
 class_name Dinosaur
 
+signal dead
+
 enum STATUS {
 	RUNNING,
 	FALLING,
@@ -64,6 +66,10 @@ func set_status(value : int) -> void:
 
 func damage(value : int) -> void:
 	states[status].damage(value)
+
+func die() -> void:
+	emit_signal("dead")
+	queue_free()
 
 func _physics_process(delta : float) -> void:
 	states[status].process(delta)

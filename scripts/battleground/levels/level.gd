@@ -11,6 +11,9 @@ func start() -> void:
 	setup_waves()
 	start_waves()
 
+func waves_concluded() -> bool:
+	return (current_wave == END_OF_WAVES)
+
 func setup_waves() -> void:
 	return
 

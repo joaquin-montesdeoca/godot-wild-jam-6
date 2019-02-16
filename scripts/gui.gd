@@ -55,6 +55,7 @@ func animate(animation : int) -> void:
 		$Tween.interpolate_property($Center/Label, ":modulate:a", 1.0, 0.0, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
+		$ColorRect.show()
 		$Tween.interpolate_property($ColorRect, ":modulate:a", 0.0, 1.0, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 
@@ -76,6 +77,9 @@ func set_item_selected(item_selected : int) -> void:
 
 func set_title(value : String) -> void:
 	$Center/Label.set_text(value)
+
+func finish_level() -> void:
+	animate(TWEEN_ANIMATION.LEVEL_FINISH)
 
 func pre_game_over() -> void:
 	its_game_over = true
@@ -108,6 +112,8 @@ func _on_tween_completed(object, key):
 		$ColorRect.hide()
 		$Center.hide()
 		emit_signal("start_level")
+	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
+		get_tree().reload_current_scene()
 	tween_animation = TWEEN_ANIMATION.NOTHING
 
 func _on_GameOver_timeout():

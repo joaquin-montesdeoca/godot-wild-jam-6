@@ -7,3 +7,6 @@ func set_timers(value : Dictionary) -> void:
 
 func start() -> void:
 	return
+
+func waves_concluded() -> bool:
+	return false

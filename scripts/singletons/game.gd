@@ -14,6 +14,7 @@ enum LEVEL {
 	LEVEL3 = 3,
 	LEVEL4 = 4,
 	LEVEL5 = 5,
+	YOU_WON = 6,
 }
 onready var level_titles : Dictionary = {
 	LEVEL.TUTORIAL : "Tutorial",
@@ -61,6 +62,19 @@ func set_current_level(value : int) -> void:
 
 func get_current_level() -> int:
 	return current_level
+
+func set_next_level() -> void:
+	match current_level:
+		LEVEL.LEVEL1:
+			current_level = LEVEL.LEVEL2
+		LEVEL.LEVEL2:
+			current_level = LEVEL.LEVEL3
+		LEVEL.LEVEL3:
+			current_level = LEVEL.LEVEL4
+		LEVEL.LEVEL4:
+			current_level = LEVEL.LEVEL5
+		LEVEL.LEVEL5:
+			current_level = LEVEL.YOU_WON
 
 func get_level_title() -> String:
 	return level_titles[current_level]

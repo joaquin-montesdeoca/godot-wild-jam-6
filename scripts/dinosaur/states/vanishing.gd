@@ -6,4 +6,4 @@ func start() -> void:
 	sprites["Animation"].play("Vanishing")
 
 func animation_finished() -> void:
-	owner.queue_free()
+	owner.die()

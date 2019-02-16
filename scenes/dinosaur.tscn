@@ -793,7 +793,6 @@ __meta__ = {
 }
 
 [node name="States" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="Running" type="Node" parent="States"]
