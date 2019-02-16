@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/slot.gd" type="Script" id=1]
 [ext_resource path="res://scripts/slot/states.gd" type="Script" id=2]
@@ -19,17 +19,22 @@
 [ext_resource path="res://sprites/BrokenCactusPhase03.png" type="Texture" id=17]
 [ext_resource path="res://sprites/BrokenCactusPhase04.png" type="Texture" id=18]
 [ext_resource path="res://sprites/BrokenCactusPhase05.png" type="Texture" id=19]
+[ext_resource path="res://sounds/BreakingWood01.wav" type="AudioStream" id=20]
+[ext_resource path="res://sounds/BreakingWood02.wav" type="AudioStream" id=21]
+[ext_resource path="res://sounds/BreakingWood03.wav" type="AudioStream" id=22]
+[ext_resource path="res://sounds/ScissorsCutting.wav" type="AudioStream" id=23]
+[ext_resource path="res://sounds/Pop01.wav" type="AudioStream" id=24]
+[ext_resource path="res://sounds/Pop02.wav" type="AudioStream" id=25]
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="StreamTexture" id=1]
 
 flags = 4
-load_path = "res://.import/CircleGolden.png-909dc47b030fb67b7cace3cde2886b64.stex"
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 
 extents = Vector2( 40, 50 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 
 extents = Vector2( 19.1801, 29.3215 )
 
@@ -61,6 +66,7 @@ script = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Sprites" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Normal" type="Node2D" parent="Sprites"]
 editor/display_folded = true
@@ -139,7 +145,7 @@ texture = ExtResource( 19 )
 visible = false
 position = Vector2( 36.776, 72.399 )
 scale = Vector2( 0.35, 0.35 )
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 
 [node name="Timers" type="Node" parent="."]
 editor/display_folded = true
@@ -148,10 +154,36 @@ editor/display_folded = true
 wait_time = 10.0
 one_shot = true
 
+[node name="Sounds" type="Node" parent="."]
+
+[node name="BreakinWood01" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
+volume_db = -12.5
+
+[node name="BreakinWood02" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 21 )
+volume_db = -12.5
+
+[node name="BreakinWood03" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+volume_db = -12.5
+
+[node name="Scissors" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
+volume_db = -20.0
+
+[node name="Plant" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 24 )
+volume_db = -10.0
+
+[node name="Growth" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 25 )
+volume_db = -10.0
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 40, 50 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 one_way_collision_margin = 0.0
 
 [node name="AreaCactus" type="Area2D" parent="."]
@@ -161,7 +193,7 @@ collision_mask = 4
 [node name="Collision" type="CollisionShape2D" parent="AreaCactus"]
 visible = false
 position = Vector2( 39.8431, 54.2052 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_Slot_mouse_entered"]

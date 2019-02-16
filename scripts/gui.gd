@@ -5,6 +5,7 @@ signal start_level
 
 onready var game = get_node("/root/game")
 var its_game_over = false
+var buttons_enabled = false
 
 enum TWEEN_ANIMATION {
 	NOTHING,
@@ -33,7 +34,7 @@ func _input(event : InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			game.set_item_selected(game.ITEM_SELECTED.NOTHING)
-	else:
+	elif buttons_enabled:
 		if event.is_action_pressed("ui_cactus"):
 			game.set_item_selected(game.ITEM_SELECTED.CACTUS)
 		elif event.is_action_pressed("ui_scissors"):
@@ -71,9 +72,11 @@ func set_item_selected(item_selected : int) -> void:
 	elif item_selected == game.ITEM_SELECTED.CACTUS:
 		$Cursor.texture = $Buttons/Cactus.get_icon()
 		$Cursor.scale = Vector2(0.5, 0.5)
+		$Sounds/Select.play()
 	elif item_selected == game.ITEM_SELECTED.SCISSORS:
 		$Cursor.texture = $Buttons/Scissors.get_icon()
 		$Cursor.scale = Vector2(0.5, 0.5)
+		$Sounds/Select.play()
 
 func set_title(value : String) -> void:
 	$Title/Label.set_text(value)
@@ -81,13 +84,18 @@ func set_title(value : String) -> void:
 func set_tutorial_text(value : String) -> void:
 	$Tutorial/Label.set_text(value)
 
+func add_pop_up(pop_up : Node2D) -> void:
+	$PopUpItems.add_child(pop_up)
+
 func finish_level() -> void:
 	animate(TWEEN_ANIMATION.LEVEL_FINISH)
 
 func pre_game_over() -> void:
 	its_game_over = true
+	buttons_enabled = false
 	$Title.visible = false
 	$Tutorial.visible = false
+	$PopUpItems.visible = false
 	$FleeingSprites.visible = false
 	$Buttons.visible = false
 	$Cursor.visible = false
@@ -116,6 +124,7 @@ func _on_tween_completed(object, key):
 	elif tween_animation == TWEEN_ANIMATION.TITLE_VANISH:
 		$ColorRect.hide()
 		$Title.hide()
+		buttons_enabled = true
 		emit_signal("start_level")
 	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
 		get_tree().reload_current_scene()

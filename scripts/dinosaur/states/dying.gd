@@ -4,6 +4,7 @@ func start() -> void:
 	.start()
 	
 	sprites["Animation"].play("Dying")
+	play_fall_sound()
 
 func process(delta : float) -> void:
 	owner.position.x -= owner.SPEED * delta

@@ -58,6 +58,12 @@ func setup_state(state : Node) -> void:
 		"OnGround" : $Timers/OnGround,
 		"Dead" : $Timers/Dead,
 	})
+	state.set_sounds({
+		"Fall01" : $Sounds/Fall01,
+		"Fall02" : $Sounds/Fall02,
+		"Fall03" : $Sounds/Fall03,
+		"SandWalk" : $Sounds/SandWalk,
+	})
 	state.set_collision($Area/Collision)
 
 func set_status(value : int) -> void:

@@ -28,6 +28,9 @@ func setup_timer(time : float) -> void:
 func spawn_wave() -> void:
 	var wave : Dictionary = waves[current_wave]
 	
+	if wave["play_sound"]:
+		play_growl_sound()
+	
 	var line_number : int
 	for spawn_number in range(wave["number"]):
 		line_number = random.draw_from_random_array()
@@ -41,3 +44,7 @@ func setup_next_wave() -> void:
 		setup_timer(waves[current_wave]["time"])
 	else:
 		current_wave = END_OF_WAVES
+
+func play_growl_sound() -> void:
+	var fall_sound = "Growl0" + str(random.get_rand_int(1, 3))
+	sounds[fall_sound].play()

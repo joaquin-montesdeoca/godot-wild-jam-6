@@ -12,6 +12,7 @@ func mouse_clicked() -> void:
 func plant() -> void:
 	game.add_cacti(-1)
 	game.update_cacti_gui()
+	sounds["Plant"].play()
 	owner.set_status(owner.STATUS.CACTUS_1)
 	owner.emit_signal("plant")
 

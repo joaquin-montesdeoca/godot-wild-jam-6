@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DinosaurFall01.wav-63a19138f909a911ecddef144a58320f.sample"
+
+[deps]
+
+source_file="res://sounds/DinosaurFall01.wav"
+dest_files=[ "res://.import/DinosaurFall01.wav-63a19138f909a911ecddef144a58320f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

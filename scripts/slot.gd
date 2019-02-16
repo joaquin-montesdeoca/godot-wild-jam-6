@@ -63,8 +63,16 @@ func setup_state(state : Node) -> void:
 		STATUS.CACTUS_4 : $Sprites/Broken/CactusPhase04,
 		STATUS.CACTUS_5 : $Sprites/Broken/CactusPhase05,
 	})
-	state.set_timer({
+	state.set_timers({
 		"GrowUp" : $Timers/GrowUp,
+	})
+	state.set_sounds({
+		"BreakinWood01" : $Sounds/BreakinWood01,
+		"BreakinWood02" : $Sounds/BreakinWood02,
+		"BreakinWood03" : $Sounds/BreakinWood03,
+		"Scissors" : $Sounds/Scissors,
+		"Plant" : $Sounds/Plant,
+		"Growth" : $Sounds/Growth,
 	})
 
 func set_status(value : int) -> void:
@@ -87,7 +95,7 @@ func pop_up_cactus() -> void:
 	var go_to_point : Vector2 = game.get_gui().get_cactus_button_position()
 	pop_up.on_click_go_to(go_to_point)
 	
-	game.get_gui().add_child(pop_up)
+	game.get_gui().add_pop_up(pop_up)
 	
 	pop_up.connect("collected", self, "on_collected_popup_cactus")
 	pop_up.connect("clicked", self, "on_clicked_popup_cactus")

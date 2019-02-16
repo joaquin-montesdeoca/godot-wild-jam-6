@@ -6,6 +6,7 @@ func start() -> void:
 	sprites["Sprites"].modulate = Color("#ffffffff")
 	sprites["Eye"].set_texture(owner.default_eye)
 	sprites["Animation"].play("Running")
+	sounds["SandWalk"].play()
 
 func setup_collision() -> void:
 	collision.disabled = false

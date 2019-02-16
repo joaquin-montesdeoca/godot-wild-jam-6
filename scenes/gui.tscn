@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/gui.gd" type="Script" id=1]
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/CactusPhase01.png" type="Texture" id=3]
 [ext_resource path="res://sprites/Scissors.png" type="Texture" id=4]
 [ext_resource path="res://fonts/Oleander Cakes.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://sounds/Select.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=3]
 
@@ -51,10 +52,13 @@ key_text = "W"
 
 [node name="FleeingSprites" type="Node2D" parent="."]
 
+[node name="PopUpItems" type="Node2D" parent="."]
+
 [node name="Cursor" type="Sprite" parent="."]
 scale = Vector2( 0.27, 0.27 )
 
 [node name="Tutorial" type="MarginContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 margin_left = 186.0
 margin_bottom = 100.0
@@ -71,6 +75,7 @@ custom_constants/shadow_offset_y = 8
 max_lines_visible = 1
 
 [node name="Title" type="CenterContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -0.814514
@@ -87,6 +92,7 @@ custom_constants/shadow_offset_x = 8
 custom_constants/shadow_offset_y = 8
 
 [node name="ColorRect" type="ColorRect" parent="."]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -109,6 +115,7 @@ text = "GAME OVER"
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Timers" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="GameOver" type="Timer" parent="Timers"]
 one_shot = true
@@ -116,6 +123,12 @@ one_shot = true
 [node name="Title" type="Timer" parent="Timers"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Select" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+volume_db = -20.0
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
 [connection signal="timeout" from="Timers/GameOver" to="." method="_on_GameOver_timeout"]

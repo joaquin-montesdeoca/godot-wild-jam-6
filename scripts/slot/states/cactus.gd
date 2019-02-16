@@ -19,9 +19,11 @@ func cut():
 	var new_status : int
 	new_status = owner.status - 1
 	
+	sounds["Scissors"].play()
 	owner.set_status(new_status)
 	owner.pop_up_cactus()
 	owner.emit_signal("cut_cactus")
 
 func grow_up() -> void:
+	sounds["Growth"].play()
 	owner.set_status(owner.status + 1)

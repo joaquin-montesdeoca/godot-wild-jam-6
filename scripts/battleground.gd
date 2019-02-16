@@ -38,6 +38,11 @@ func setup_levels() -> void:
 			"Waves" : $Timers/Waves,
 			"Tutorial" : $Timers/Tutorial,
 		})
+		levels[i].set_sounds({
+			"Growl01" : $Sounds/Growl01,
+			"Growl02" : $Sounds/Growl02,
+			"Growl03" : $Sounds/Growl03,
+		})
 
 func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 	var dinosaur = dinosaur_scene.instance()
