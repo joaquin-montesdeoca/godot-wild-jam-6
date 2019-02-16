@@ -12,5 +12,11 @@ func set_sounds(value : Dictionary) -> void:
 func start() -> void:
 	return
 
+func last_wave_was_deployed() -> bool:
+	return false
+
 func waves_concluded() -> bool:
 	return false
+
+func last_dinosaur_died() -> void:
+	return

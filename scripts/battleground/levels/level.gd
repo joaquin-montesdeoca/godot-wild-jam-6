@@ -11,8 +11,11 @@ func start() -> void:
 	setup_waves()
 	start_waves()
 
-func waves_concluded() -> bool:
+func last_wave_was_deployed() -> bool:
 	return (current_wave == END_OF_WAVES)
+
+func waves_concluded() -> bool:
+	return (owner.num_dinosaurs <= 0 and last_wave_was_deployed())
 
 func setup_waves() -> void:
 	return
@@ -44,6 +47,9 @@ func setup_next_wave() -> void:
 		setup_timer(waves[current_wave]["time"])
 	else:
 		current_wave = END_OF_WAVES
+
+func last_dinosaur_died() -> void:
+	owner.next_level()
 
 func play_growl_sound() -> void:
 	var fall_sound = "Growl0" + str(random.get_rand_int(1, 3))

@@ -68,6 +68,8 @@ func get_current_level() -> int:
 
 func set_next_level() -> void:
 	match current_level:
+		LEVEL.TUTORIAL:
+			current_level = LEVEL.LEVEL1
 		LEVEL.LEVEL1:
 			current_level = LEVEL.LEVEL2
 		LEVEL.LEVEL2:

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/battleground.gd" type="Script" id=1]
 [ext_resource path="res://scripts/battleground/levels.gd" type="Script" id=2]
-[ext_resource path="res://scripts/battleground/levels/tutorial.gd" type="Script" id=3]
+[ext_resource path="res://scripts/battleground/levels/level/tutorial.gd" type="Script" id=3]
 [ext_resource path="res://scripts/battleground/levels/level/level1.gd" type="Script" id=4]
 [ext_resource path="res://scripts/battleground/levels/level/level2.gd" type="Script" id=5]
 [ext_resource path="res://scripts/battleground/levels/level/level3.gd" type="Script" id=6]
@@ -267,14 +267,13 @@ position = Vector2( 800, 0 )
 [node name="GUI" parent="." instance=ExtResource( 11 )]
 
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Waves" type="Timer" parent="Timers"]
 wait_time = 25.0
 one_shot = true
 
 [node name="Tutorial" type="Timer" parent="Timers"]
-wait_time = 7.5
+wait_time = 5.0
 
 [node name="Sounds" type="Node" parent="."]
 

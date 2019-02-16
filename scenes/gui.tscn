@@ -128,7 +128,7 @@ one_shot = true
 
 [node name="Select" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 6 )
-volume_db = -20.0
+volume_db = -10.0
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
 [connection signal="timeout" from="Timers/GameOver" to="." method="_on_GameOver_timeout"]

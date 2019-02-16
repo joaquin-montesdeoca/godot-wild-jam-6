@@ -86,5 +86,5 @@ func _on_GUI_start_level():
 func _on_Dinosaur_dead():
 	num_dinosaurs -= 1
 	
-	if num_dinosaurs <= 0 and levels[current_level].waves_concluded():
-		next_level()
+	if levels[current_level].waves_concluded():
+		levels[current_level].last_dinosaur_died()
