@@ -90,13 +90,19 @@ func set_next_level() -> void:
 func get_level_title() -> String:
 	return level_titles[current_level]
 
+func go_to_credits() -> void:
+	reset_game_data()
+	get_tree().change_scene("res://scenes/credits.tscn")
+
 func go_to_start() -> void:
+	reset_game_data()
+	get_tree().change_scene("res://scenes/start.tscn")
+
+func reset_game_data() -> void:
 	battleground = null
 	slots.clear()
 	item_selected = ITEM_SELECTED.NOTHING
 	num_cacti = 0
-	
-	get_tree().change_scene("res://scenes/start.tscn")
 
 func add_slot(slot : Node2D):
 	self.connect("item_selected_changed", slot, "on_item_selected_changed")

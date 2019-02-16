@@ -61,11 +61,7 @@ func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 
 func next_level() -> void:
 	game.set_next_level()
-	
-	if game.get_current_level() == game.LEVEL.YOU_WON:
-		print("You won!")
-	else:
-		$GUI.finish_level()
+	$GUI.finish_level()
 
 func _on_Waves_timeout():
 	levels[current_level].spawn_wave()

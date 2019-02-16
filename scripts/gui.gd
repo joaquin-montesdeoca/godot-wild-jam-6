@@ -127,7 +127,10 @@ func _on_tween_completed(object, key):
 		buttons_enabled = true
 		emit_signal("start_level")
 	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
-		get_tree().reload_current_scene()
+		if game.get_current_level() == game.LEVEL.YOU_WON:
+			game.go_to_credits()
+		else:
+			get_tree().reload_current_scene()
 	tween_animation = TWEEN_ANIMATION.NOTHING
 
 func _on_GameOver_timeout():
