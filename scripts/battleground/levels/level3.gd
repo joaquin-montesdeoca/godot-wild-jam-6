@@ -1,4 +1,4 @@
-extends "../level.gd"
+extends "../levels.gd"
 
 func setup_waves() -> void:
 	waves = [

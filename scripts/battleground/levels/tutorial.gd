@@ -1,4 +1,4 @@
-extends "../level.gd"
+extends "../levels.gd"
 
 enum TUTORIAL {
 	CLICK_THE_CACTUS,
