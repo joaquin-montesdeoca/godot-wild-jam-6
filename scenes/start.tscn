@@ -62,16 +62,17 @@ margin_top = 50.0
 margin_right = 924.0
 margin_bottom = 580.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="Menu" type="VBoxContainer" parent="Control"]
 anchor_right = 1.0
 margin_bottom = 95.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="Title" type="HBoxContainer" parent="Control/Menu"]
+editor/display_folded = true
 margin_right = 824.0
 margin_bottom = 125.0
 custom_constants/separation = 20
 
-[node name="Cactus" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+[node name="Cactus" type="Label" parent="Control/Menu/Title"]
 margin_right = 230.0
 margin_bottom = 125.0
 custom_fonts/font = SubResource( 2 )
@@ -82,7 +83,7 @@ custom_constants/shadow_offset_y = 8
 text = "Cactus"
 align = 1
 
-[node name="Vs" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+[node name="Vs" type="Label" parent="Control/Menu/Title"]
 margin_left = 250.0
 margin_right = 341.0
 margin_bottom = 125.0
@@ -94,7 +95,7 @@ custom_constants/shadow_offset_y = 8
 text = "Vs."
 align = 1
 
-[node name="Dinosaurs" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+[node name="Dinosaurs" type="Label" parent="Control/Menu/Title"]
 margin_left = 361.0
 margin_right = 696.0
 margin_bottom = 125.0
@@ -106,7 +107,7 @@ custom_constants/shadow_offset_y = 8
 text = "Dinosaurs"
 align = 1
 
-[node name="New" type="Button" parent="Control/VBoxContainer"]
+[node name="New" type="Button" parent="Control/Menu"]
 margin_top = 129.0
 margin_right = 824.0
 margin_bottom = 229.0
@@ -115,7 +116,7 @@ text = " "
 flat = true
 align = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/New"]
+[node name="Label" type="Label" parent="Control/Menu/New"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 5 )
@@ -123,7 +124,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "New"
 align = 2
 
-[node name="Continue" type="Button" parent="Control/VBoxContainer"]
+[node name="Continue" type="Button" parent="Control/Menu"]
 margin_top = 233.0
 margin_right = 824.0
 margin_bottom = 333.0
@@ -133,7 +134,7 @@ text = " "
 flat = true
 align = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/Continue"]
+[node name="Label" type="Label" parent="Control/Menu/Continue"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 5 )
@@ -141,7 +142,7 @@ custom_colors/font_color = Color( 0.501961, 0.501961, 0.501961, 1 )
 text = "Continue"
 align = 2
 
-[node name="Quit" type="Button" parent="Control/VBoxContainer"]
+[node name="Quit" type="Button" parent="Control/Menu"]
 margin_top = 337.0
 margin_right = 824.0
 margin_bottom = 457.0
@@ -149,7 +150,7 @@ rect_min_size = Vector2( 0, 120 )
 flat = true
 align = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/Quit"]
+[node name="Label" type="Label" parent="Control/Menu/Quit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -20.0
@@ -158,7 +159,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Quit"
 align = 2
 
-[node name="Credits" type="Label" parent="Control/VBoxContainer"]
+[node name="Credits" type="Label" parent="Control/Menu"]
 margin_top = 461.0
 margin_right = 824.0
 margin_bottom = 524.0
@@ -187,8 +188,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[connection signal="pressed" from="Control/VBoxContainer/New" to="." method="_on_New_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Control/Menu/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="Control/Menu/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Control/Menu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_completed"]
 [connection signal="timeout" from="BlackTimer" to="." method="_on_BlackTimer_timeout"]

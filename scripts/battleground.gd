@@ -14,6 +14,8 @@ onready var lines = {
 var dinosaur_scene = preload("res://scenes/dinosaur.tscn")
 var levels : Dictionary
 var num_dinosaurs : int = 0
+var pre_game_over : bool = false
+var game_over : bool = false
 onready var current_level : int = game.get_current_level()
 
 func _ready():
@@ -69,6 +71,11 @@ func _on_Waves_timeout():
 	levels[current_level].spawn_wave()
 
 func _on_dinosaur_reached_goal(area_id, area, area_shape, self_shape):
+	if pre_game_over:
+		return
+	
+	pre_game_over = true
+
 	$GUI.pre_game_over()
 	
 	var toZoom : Vector2 = Vector2(0.25,0.25)
@@ -78,6 +85,10 @@ func _on_dinosaur_reached_goal(area_id, area, area_shape, self_shape):
 	$Camera.position = toPos
 
 func _on_dinosaur_left_goal(area_id, area, area_shape, self_shape):
+	if game_over:
+		return
+	
+	game_over = true
 	$GUI.game_over()
 
 func _on_GUI_start_level():

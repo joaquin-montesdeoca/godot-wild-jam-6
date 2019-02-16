@@ -25,6 +25,7 @@ onready var level_titles : Dictionary = {
 	LEVEL.LEVEL5 : "Level 5",
 }
 onready var current_level : int = LEVEL.TUTORIAL setget set_current_level, get_current_level
+onready var last_played_level : int = LEVEL.TUTORIAL setget , get_last_played_level
 
 var it_just_started : bool = true
 
@@ -62,24 +63,29 @@ func get_slots() -> Array:
 
 func set_current_level(value : int) -> void:
 	current_level = value
+	if current_level > last_played_level and current_level != LEVEL.YOU_WON:
+		last_played_level = current_level
 
 func get_current_level() -> int:
 	return current_level
 
+func get_last_played_level() -> int:
+	return last_played_level
+
 func set_next_level() -> void:
 	match current_level:
 		LEVEL.TUTORIAL:
-			current_level = LEVEL.LEVEL1
+			set_current_level(LEVEL.LEVEL1)
 		LEVEL.LEVEL1:
-			current_level = LEVEL.LEVEL2
+			set_current_level(LEVEL.LEVEL2)
 		LEVEL.LEVEL2:
-			current_level = LEVEL.LEVEL3
+			set_current_level(LEVEL.LEVEL3)
 		LEVEL.LEVEL3:
-			current_level = LEVEL.LEVEL4
+			set_current_level(LEVEL.LEVEL4)
 		LEVEL.LEVEL4:
-			current_level = LEVEL.LEVEL5
+			set_current_level(LEVEL.LEVEL5)
 		LEVEL.LEVEL5:
-			current_level = LEVEL.YOU_WON
+			set_current_level(LEVEL.YOU_WON)
 
 func get_level_title() -> String:
 	return level_titles[current_level]
