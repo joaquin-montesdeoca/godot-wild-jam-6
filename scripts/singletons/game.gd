@@ -30,7 +30,7 @@ var it_just_started : bool = true
 
 var gui : GUI setget set_gui, get_gui
 var battleground : Node2D setget set_battleground, get_battleground
-var slots : Array
+var slots : Array setget , get_slots
 var item_selected : int = ITEM_SELECTED.NOTHING setget set_item_selected, get_item_selected
 var num_cacti : int = 0 setget set_num_cacti, get_num_cacti
 
@@ -56,6 +56,9 @@ func set_battleground(value : Node2D) -> void:
 
 func get_battleground() -> Node2D:
 	return battleground
+
+func get_slots() -> Array:
+	return slots
 
 func set_current_level(value : int) -> void:
 	current_level = value

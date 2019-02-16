@@ -21,7 +21,7 @@ var fleeing_sprite_scene = preload("res://scenes/fleeing_sprite.tscn")
 func _ready():
 	game.set_gui(self)
 	
-	$Center/Label.set_text(game.get_level_title())
+	$Title/Label.set_text(game.get_level_title())
 	animate(TWEEN_ANIMATION.LEVEL_START)
 
 func _input(event : InputEvent) -> void:
@@ -52,7 +52,7 @@ func animate(animation : int) -> void:
 		$Tween.interpolate_property($ColorRect, ":modulate:a", 1.0, 0.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 	elif tween_animation == TWEEN_ANIMATION.TITLE_VANISH:
-		$Tween.interpolate_property($Center/Label, ":modulate:a", 1.0, 0.0, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.interpolate_property($Title/Label, ":modulate:a", 1.0, 0.0, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
 		$ColorRect.show()
@@ -76,13 +76,18 @@ func set_item_selected(item_selected : int) -> void:
 		$Cursor.scale = Vector2(0.5, 0.5)
 
 func set_title(value : String) -> void:
-	$Center/Label.set_text(value)
+	$Title/Label.set_text(value)
+
+func set_tutorial_text(value : String) -> void:
+	$Tutorial/Label.set_text(value)
 
 func finish_level() -> void:
 	animate(TWEEN_ANIMATION.LEVEL_FINISH)
 
 func pre_game_over() -> void:
 	its_game_over = true
+	$Title.visible = false
+	$Tutorial.visible = false
 	$FleeingSprites.visible = false
 	$Buttons.visible = false
 	$Cursor.visible = false
@@ -110,7 +115,7 @@ func _on_tween_completed(object, key):
 		$Timers/Title.start()
 	elif tween_animation == TWEEN_ANIMATION.TITLE_VANISH:
 		$ColorRect.hide()
-		$Center.hide()
+		$Title.hide()
 		emit_signal("start_level")
 	elif tween_animation == TWEEN_ANIMATION.LEVEL_FINISH:
 		get_tree().reload_current_scene()

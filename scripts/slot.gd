@@ -1,6 +1,12 @@
 extends Area2D
 class_name Slot
 
+signal plant
+signal cut_cactus
+signal cut_broken
+signal growth
+signal broken
+
 enum STATUS {
 	EMPTY = 0,
 	CACTUS_1 = 1,
@@ -34,6 +40,7 @@ func _ready() -> void:
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and hovering:
 		if event.button_index == BUTTON_LEFT and event.pressed:
+			emit_signal("click", status)
 			mouse_clicked()
 
 func setup_state_machine() -> void:
@@ -114,4 +121,5 @@ func on_collected_popup_cactus():
 	game.update_cacti_gui()
 
 func _on_GrowUp_timeout():
+	emit_signal("growth")
 	states[status].grow_up()

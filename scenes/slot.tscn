@@ -19,7 +19,11 @@
 [ext_resource path="res://sprites/BrokenCactusPhase03.png" type="Texture" id=17]
 [ext_resource path="res://sprites/BrokenCactusPhase04.png" type="Texture" id=18]
 [ext_resource path="res://sprites/BrokenCactusPhase05.png" type="Texture" id=19]
-[ext_resource path="res://sprites/CircleGolden.png" type="Texture" id=20]
+
+[sub_resource type="StreamTexture" id=3]
+
+flags = 4
+load_path = "res://.import/CircleGolden.png-909dc47b030fb67b7cace3cde2886b64.stex"
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -135,7 +139,7 @@ texture = ExtResource( 19 )
 visible = false
 position = Vector2( 36.776, 72.399 )
 scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 20 )
+texture = SubResource( 3 )
 
 [node name="Timers" type="Node" parent="."]
 editor/display_folded = true

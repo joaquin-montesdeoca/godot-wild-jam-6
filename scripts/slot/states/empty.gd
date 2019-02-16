@@ -13,6 +13,7 @@ func plant() -> void:
 	game.add_cacti(-1)
 	game.update_cacti_gui()
 	owner.set_status(owner.STATUS.CACTUS_1)
+	owner.emit_signal("plant")
 
 func mouse_entered() -> void:
 	if game.get_item_selected() == game.ITEM_SELECTED.CACTUS:

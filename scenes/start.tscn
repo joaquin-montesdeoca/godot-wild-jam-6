@@ -67,7 +67,6 @@ anchor_right = 1.0
 margin_bottom = 95.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-editor/display_folded = true
 margin_right = 824.0
 margin_bottom = 125.0
 custom_constants/separation = 20

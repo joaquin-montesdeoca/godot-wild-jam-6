@@ -21,6 +21,7 @@ func cut():
 	
 	owner.set_status(new_status)
 	owner.pop_up_cactus()
+	owner.emit_signal("cut_cactus")
 
 func grow_up() -> void:
 	owner.set_status(owner.status + 1)

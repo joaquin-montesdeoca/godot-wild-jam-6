@@ -1,5 +1,7 @@
 extends Node2D
 
+signal spawn_dinosaur
+
 onready var game = get_node("/root/game")
 
 onready var lines = {
@@ -33,7 +35,8 @@ func setup_levels() -> void:
 	
 	for i in levels:
 		levels[i].set_timers({
-			"Waves" : $Timers/Waves
+			"Waves" : $Timers/Waves,
+			"Tutorial" : $Timers/Tutorial,
 		})
 
 func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
@@ -47,6 +50,7 @@ func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 	lines[line_number].add_child(dinosaur)
 	
 	num_dinosaurs += 1
+	emit_signal("spawn_dinosaur", dinosaur)
 
 func next_level() -> void:
 	game.set_next_level()
