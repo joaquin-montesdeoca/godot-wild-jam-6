@@ -13,7 +13,7 @@ func randomize_seed():
 func set_random_array(value : Array) -> void:
 	randomize_seed()
 	
-	random_array = value
+	random_array = value.duplicate()
 	original_random_array = value.duplicate()
 
 func reset_random_array() -> void:

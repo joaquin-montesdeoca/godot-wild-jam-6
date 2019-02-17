@@ -6,7 +6,6 @@ enum FADE {EMPTY, IN, OUT}
 var fade = FADE.EMPTY
 
 func _ready():
-	print(game.get_last_played_level())
 	if not game.just_started():
 		fade = FADE.OUT
 		$ColorRect.show()

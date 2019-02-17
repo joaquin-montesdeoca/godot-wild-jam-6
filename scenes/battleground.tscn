@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/battleground.gd" type="Script" id=1]
 [ext_resource path="res://scripts/battleground/levels.gd" type="Script" id=2]
@@ -9,11 +9,12 @@
 [ext_resource path="res://scripts/battleground/levels/level4.gd" type="Script" id=7]
 [ext_resource path="res://scripts/battleground/levels/level5.gd" type="Script" id=8]
 [ext_resource path="res://sprites/Background.png" type="Texture" id=9]
-[ext_resource path="res://scenes/slot.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/gui.tscn" type="PackedScene" id=11]
-[ext_resource path="res://sounds/DinosaurGrowl01.wav" type="AudioStream" id=12]
-[ext_resource path="res://sounds/DinosaurGrowl02.wav" type="AudioStream" id=13]
-[ext_resource path="res://sounds/DinosaurGrowl03.wav" type="AudioStream" id=14]
+[ext_resource path="res://scripts/line.gd" type="Script" id=10]
+[ext_resource path="res://scenes/slot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/gui.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sounds/DinosaurGrowl01.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/DinosaurGrowl02.wav" type="AudioStream" id=14]
+[ext_resource path="res://sounds/DinosaurGrowl03.wav" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -44,6 +45,7 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 
 [node name="Tutorial" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Tutorial" type="Node" parent="Tutorial"]
 
@@ -55,47 +57,48 @@ __meta__ = {
 }
 
 [node name="Game" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Lines" type="Node2D" parent="Game"]
-editor/display_folded = true
 
 [node name="Line01" type="Node2D" parent="Game/Lines"]
 editor/display_folded = true
 position = Vector2( 73.1214, 79.949 )
+script = ExtResource( 10 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line01"]
 editor/display_folded = true
 
-[node name="Slot01" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot01" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 
-[node name="Slot02" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot02" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 80, 0 )
 
-[node name="Slot03" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot03" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 160, 0 )
 
-[node name="Slot04" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot04" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 240, 0 )
 
-[node name="Slot05" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot05" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 320, 0 )
 
-[node name="Slot06" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot06" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 400, 0 )
 
-[node name="Slot07" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot07" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 480, 0 )
 
-[node name="Slot08" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot08" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 560, 0 )
 
-[node name="Slot09" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot09" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 640, 0 )
 
-[node name="Slot10" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot10" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 720, 0 )
 
-[node name="Slot11" parent="Game/Lines/Line01/Slots" instance=ExtResource( 10 )]
+[node name="Slot11" parent="Game/Lines/Line01/Slots" instance=ExtResource( 11 )]
 position = Vector2( 800, 0 )
 
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line01"]
@@ -103,40 +106,41 @@ position = Vector2( 800, 0 )
 [node name="Line02" type="Node2D" parent="Game/Lines"]
 editor/display_folded = true
 position = Vector2( 82.4366, 179.907 )
+script = ExtResource( 10 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line02"]
 editor/display_folded = true
 
-[node name="Slot01" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot01" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 
-[node name="Slot02" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot02" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 80, 0 )
 
-[node name="Slot03" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot03" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 160, 0 )
 
-[node name="Slot04" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot04" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 240, 0 )
 
-[node name="Slot05" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot05" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 320, 0 )
 
-[node name="Slot06" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot06" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 400, 0 )
 
-[node name="Slot07" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot07" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 480, 0 )
 
-[node name="Slot08" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot08" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 560, 0 )
 
-[node name="Slot09" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot09" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 640, 0 )
 
-[node name="Slot10" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot10" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 720, 0 )
 
-[node name="Slot11" parent="Game/Lines/Line02/Slots" instance=ExtResource( 10 )]
+[node name="Slot11" parent="Game/Lines/Line02/Slots" instance=ExtResource( 11 )]
 position = Vector2( 800, 0 )
 
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line02"]
@@ -144,40 +148,41 @@ position = Vector2( 800, 0 )
 [node name="Line03" type="Node2D" parent="Game/Lines"]
 editor/display_folded = true
 position = Vector2( 92.2202, 279.882 )
+script = ExtResource( 10 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line03"]
 editor/display_folded = true
 
-[node name="Slot01" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot01" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 
-[node name="Slot02" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot02" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 80, 0 )
 
-[node name="Slot03" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot03" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 160, 0 )
 
-[node name="Slot04" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot04" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 240, 0 )
 
-[node name="Slot05" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot05" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 320, 0 )
 
-[node name="Slot06" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot06" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 400, 0 )
 
-[node name="Slot07" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot07" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 480, 0 )
 
-[node name="Slot08" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot08" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 560, 0 )
 
-[node name="Slot09" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot09" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 640, 0 )
 
-[node name="Slot10" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot10" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 720, 0 )
 
-[node name="Slot11" parent="Game/Lines/Line03/Slots" instance=ExtResource( 10 )]
+[node name="Slot11" parent="Game/Lines/Line03/Slots" instance=ExtResource( 11 )]
 position = Vector2( 800, 0 )
 
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line03"]
@@ -185,40 +190,41 @@ position = Vector2( 800, 0 )
 [node name="Line04" type="Node2D" parent="Game/Lines"]
 editor/display_folded = true
 position = Vector2( 102.642, 379.908 )
+script = ExtResource( 10 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line04"]
 editor/display_folded = true
 
-[node name="Slot01" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot01" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 
-[node name="Slot02" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot02" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 80, 0 )
 
-[node name="Slot03" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot03" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 160, 0 )
 
-[node name="Slot04" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot04" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 240, 0 )
 
-[node name="Slot05" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot05" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 320, 0 )
 
-[node name="Slot06" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot06" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 400, 0 )
 
-[node name="Slot07" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot07" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 480, 0 )
 
-[node name="Slot08" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot08" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 560, 0 )
 
-[node name="Slot09" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot09" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 640, 0 )
 
-[node name="Slot10" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot10" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 720, 0 )
 
-[node name="Slot11" parent="Game/Lines/Line04/Slots" instance=ExtResource( 10 )]
+[node name="Slot11" parent="Game/Lines/Line04/Slots" instance=ExtResource( 11 )]
 position = Vector2( 800, 0 )
 
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line04"]
@@ -226,45 +232,46 @@ position = Vector2( 800, 0 )
 [node name="Line05" type="Node2D" parent="Game/Lines"]
 editor/display_folded = true
 position = Vector2( 112.46, 479.916 )
+script = ExtResource( 10 )
 
 [node name="Slots" type="Node2D" parent="Game/Lines/Line05"]
 editor/display_folded = true
 
-[node name="Slot01" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot01" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 
-[node name="Slot02" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot02" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 80, 0 )
 
-[node name="Slot03" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot03" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 160, 0 )
 
-[node name="Slot04" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot04" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 240, 0 )
 
-[node name="Slot05" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot05" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 320, 0 )
 
-[node name="Slot06" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot06" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 400, 0 )
 
-[node name="Slot07" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot07" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 480, 0 )
 
-[node name="Slot08" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot08" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 560, 0 )
 
-[node name="Slot09" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot09" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 640, 0 )
 
-[node name="Slot10" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot10" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 720, 0 )
 
-[node name="Slot11" parent="Game/Lines/Line05/Slots" instance=ExtResource( 10 )]
+[node name="Slot11" parent="Game/Lines/Line05/Slots" instance=ExtResource( 11 )]
 position = Vector2( 800, 0 )
 
 [node name="Dinosaurs" type="Node2D" parent="Game/Lines/Line05"]
 
-[node name="GUI" parent="." instance=ExtResource( 11 )]
+[node name="GUI" parent="." instance=ExtResource( 12 )]
 
 [node name="Timers" type="Node" parent="."]
 
@@ -278,16 +285,16 @@ wait_time = 5.0
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Growl01" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 12 )
-volume_db = -20.0
+stream = ExtResource( 13 )
+volume_db = -10.0
 
 [node name="Growl02" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 13 )
-volume_db = -20.0
+stream = ExtResource( 14 )
+volume_db = -10.0
 
 [node name="Growl03" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 14 )
-volume_db = -20.0
+stream = ExtResource( 15 )
+volume_db = -10.0
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )

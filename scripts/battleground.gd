@@ -36,6 +36,7 @@ func setup_levels() -> void:
 	}
 	
 	for i in levels:
+		levels[i].set_lines(lines)
 		levels[i].set_timers({
 			"Waves" : $Timers/Waves,
 			"Tutorial" : $Timers/Tutorial,
@@ -54,7 +55,7 @@ func spawn_dinosaur(line_number : int, spawn_number : int) -> void:
 	
 	dinosaur.connect("dead", self, "_on_Dinosaur_dead")
 	
-	lines[line_number].add_child(dinosaur)
+	lines[line_number].add_dinosaur(dinosaur)
 	
 	num_dinosaurs += 1
 	emit_signal("spawn_dinosaur", dinosaur)

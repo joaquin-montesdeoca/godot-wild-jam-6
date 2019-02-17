@@ -67,7 +67,7 @@ func next_tutorial_step(step : int):
 		TUTORIAL.SHORTCUT_FOR_CACTUS:
 			text = "Remember the shortcut for cactus is the Q key."
 		TUTORIAL.SHORTCUT_FOR_SCISSORS:
-			text = "And that the shortcut for scissors is the W key."
+			text = "And the shortcut for scissors is the W key."
 		TUTORIAL.THATS_EVERYTHING:
 			text = "That is everything there is to know. Good luck!"
 		TUTORIAL.END_OF_TUTORIAL:

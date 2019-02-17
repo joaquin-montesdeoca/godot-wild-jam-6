@@ -29,6 +29,9 @@ func _input(event : InputEvent) -> void:
 	if its_game_over:
 		return
 	
+	if event.is_action_pressed("ui_accept"):
+		owner.next_level()
+	
 	if event is InputEventMouseMotion:
 		$Cursor.position = event.position
 	elif event is InputEventMouseButton:
@@ -93,6 +96,7 @@ func finish_level() -> void:
 func pre_game_over() -> void:
 	its_game_over = true
 	buttons_enabled = false
+	game.set_item_selected(game.ITEM_SELECTED.NOTHING)
 	$Title.visible = false
 	$Tutorial.visible = false
 	$PopUpItems.visible = false
@@ -130,6 +134,7 @@ func _on_tween_completed(object, key):
 		if game.get_current_level() == game.LEVEL.YOU_WON:
 			game.go_to_credits()
 		else:
+			game.reset_game_data()
 			get_tree().reload_current_scene()
 	tween_animation = TWEEN_ANIMATION.NOTHING
 
