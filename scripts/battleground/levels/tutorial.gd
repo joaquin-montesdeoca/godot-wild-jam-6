@@ -60,7 +60,7 @@ func next_tutorial_step(step : int):
 		TUTORIAL.CACTUS_BROKEN:
 			text = "Use the scissors to remove the broken cactus."
 		TUTORIAL.BROKEN_CACTUS_REMOVED:
-			text = ""
+			text = "Bigger cactus produces more damage."
 		TUTORIAL.DEAD_DINOSAUR:
 			text = "Good. You have killed your first dinosaur."
 			timers["Tutorial"].start()

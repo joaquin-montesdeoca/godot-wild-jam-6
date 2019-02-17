@@ -40,7 +40,6 @@ func _ready() -> void:
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and hovering:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			emit_signal("click", status)
 			mouse_clicked()
 
 func setup_state_machine() -> void:
