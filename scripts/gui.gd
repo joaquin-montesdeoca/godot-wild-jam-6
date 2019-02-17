@@ -29,9 +29,6 @@ func _input(event : InputEvent) -> void:
 	if its_game_over:
 		return
 	
-	if event.is_action_pressed("ui_accept"):
-		owner.next_level()
-	
 	if event is InputEventMouseMotion:
 		$Cursor.position = event.position
 	elif event is InputEventMouseButton:
